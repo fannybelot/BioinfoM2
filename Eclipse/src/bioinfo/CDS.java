@@ -294,5 +294,7 @@ public class CDS {
 	public List<Integer[]> getIntCDS() {
 		return intCDS;
 	}
-
+	public String getChaine() {
+		return chaine;
+	}
 }
