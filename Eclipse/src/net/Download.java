@@ -47,7 +47,11 @@ public class Download {
 	public static void getNC(String id, File local_file) throws Exception {
 		URL url = null;
 		url = new URL("https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&save=file&log$=seqview&db=nuccore&report=gbwithparts&sort=&from=begin&to=end&maxplex=3&id=" + id);
-		FileUtils.copyURLToFile(url, local_file);
+		try {
+			FileUtils.copyURLToFile(url, local_file);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 //	public static void listOrganisms() throws IOException {
