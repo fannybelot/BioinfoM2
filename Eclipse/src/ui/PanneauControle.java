@@ -243,8 +243,6 @@ public class PanneauControle {
 				public void actionPerformed(ActionEvent e)
 				{
 					orch.killWorkers();
-					thread_orch.interrupt(); //does not work
-					thread_orch.stop();
 					InterfaceUtilisateur.journalise("INFO", "Abandon des traitements");
 					
 					//met a jour les boutons

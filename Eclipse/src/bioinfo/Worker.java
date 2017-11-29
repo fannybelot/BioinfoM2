@@ -10,6 +10,7 @@ public class Worker extends Thread {
 	private Vector<Organism> joblist;
 	private int numero_de_thread;
 
+
 	Worker(Vector<Organism> joblist, int num) {
 		this.joblist = joblist;
 		this.numero_de_thread = num;
@@ -52,7 +53,11 @@ public class Worker extends Thread {
 				//when there's only one organism to analyse.
 				//Maybe because the workers both try to remove(0) at the same time.
 			}
+			if (Thread.interrupted()) {
+		        break;
+		    }
 		}
 		InterfaceUtilisateur.journalise("Info","Finishing worker "+numero_de_thread);
 	}
+	
 }
