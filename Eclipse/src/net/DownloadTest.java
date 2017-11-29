@@ -8,7 +8,8 @@ public class DownloadTest extends Download {
 
 	@Test
 	public void test() throws IOException {
-		organismsToJson(getOrganisms());
+		getOrganisms();
+		System.out.println("Done");
 	}
 
 }

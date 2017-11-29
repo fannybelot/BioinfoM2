@@ -7,7 +7,7 @@ import java.util.Vector;
 
 public class Organism {
 	private List<NC> NCs;			//list of NC objects
-	private Vector<String> NCs_IDs;	//list of NC's IDs, needed to download them.
+	private Vector<String> NCs_IDs = new Vector<String>();	//list of NC's IDs, needed to download them.
 	private String name;
 	private String kingdom;
 	private String group;
@@ -132,6 +132,10 @@ public class Organism {
 	
 	public void setNCs_IDs(Vector<String> nCs_IDs) {
 		NCs_IDs = nCs_IDs;
+	}
+	
+	public void addNC_ID (String NC) {
+		this.NCs_IDs.add(NC);
 	}
 
 	public String toString(){
