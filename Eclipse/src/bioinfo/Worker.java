@@ -9,6 +9,7 @@ public class Worker extends Thread {
 	
 	private Vector<Organism> joblist;
 	private int numero_de_thread;
+	private volatile boolean exit = false;
 
 
 	Worker(Vector<Organism> joblist, int num) {
@@ -20,7 +21,7 @@ public class Worker extends Thread {
 	public void run() {
 		InterfaceUtilisateur.journalise("Info","Starting worker "+numero_de_thread);
 		Writer w;
-		while (!joblist.isEmpty()){
+		while (!joblist.isEmpty() && !exit){
 			try{
 				Organism orga = joblist.remove(0);
 				try {
@@ -53,11 +54,12 @@ public class Worker extends Thread {
 				//when there's only one organism to analyse.
 				//Maybe because the workers both try to remove(0) at the same time.
 			}
-			if (Thread.interrupted()) {
-		        break;
-		    }
 		}
 		InterfaceUtilisateur.journalise("Info","Finishing worker "+numero_de_thread);
+	}
+	
+	public void kill() {
+		exit = true;
 	}
 	
 }
