@@ -25,3 +25,8 @@ hs_err_pid*
 # Automated Eclipse files
 Eclipse/bin
 
+# Created results
+Eclipse/genomes
+Eclipse/Results
+Eclipse/liste_genomes.json
+
