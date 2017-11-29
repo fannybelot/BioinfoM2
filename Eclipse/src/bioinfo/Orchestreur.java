@@ -52,7 +52,6 @@ public class Orchestreur implements Runnable {
 	public void killWorkers(){
 		for(Worker w : workers){
 			w.interrupt();
-			//w.stop();
 		}
 	}
 	
