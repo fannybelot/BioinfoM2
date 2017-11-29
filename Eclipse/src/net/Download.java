@@ -32,6 +32,17 @@ public class Download {
 	private Vector<Organism> eukaryota = new Vector<Organism>();
 	private Vector<Organism> viroids = new Vector<Organism>();
 	private Vector<Organism> viruses = new Vector<Organism>();
+	private static Download instance = null;
+	
+   protected Download() {
+      // Exists only to defeat instantiation.
+   }
+   public static Download getInstance() {
+      if (instance == null) {
+         instance = new Download();
+      }
+      return instance;
+   }
 	
 	public static void getNC(String id, File local_file) throws Exception {
 		URL url = null;

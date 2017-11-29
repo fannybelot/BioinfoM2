@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import bioinfo.Organism;
+import net.Download;
 
 public final class Primary extends Thread {
 	private static int JOB = 0;
@@ -29,30 +30,36 @@ public final class Primary extends Thread {
 		ORGANISMS.addAll(organisms);
 	}
 	
+	public synchronized static void add(Vector<Organism> organisms) {
+		ORGANISMS.addAll(organisms);
+	}
+	
 	public static synchronized Vector<Organism> organisms() {
 		return ORGANISMS;
 	}
 	
 	private void go() {
-		for (int i = 0; i < SECONDARIES.length; i++) {
-			SECONDARIES[i] = new Secondary();
-			SECONDARIES[i].start();
-		}
-		for (int i = 0; i < SECONDARIES.length; i++) {
-			try {
-				SECONDARIES[i].join();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		Download d = Download.getInstance();
+		this.add(d.getOrganisms());
+//		for (int i = 0; i < SECONDARIES.length; i++) {
+//			SECONDARIES[i] = new Secondary();
+//			SECONDARIES[i].start();
+//		}
+//		for (int i = 0; i < SECONDARIES.length; i++) {
+//			try {
+//				SECONDARIES[i].join();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 	}
 	
 	@Override
 	public void run() {
-		while (JOB < JOBLIST.length) {
+//		while (JOB < JOBLIST.length) {
 			this.go();
-			JOB++;
-		}
+//			JOB++;
+//		}
 	}
 }
