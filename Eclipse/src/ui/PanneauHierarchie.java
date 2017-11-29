@@ -109,7 +109,7 @@ public class PanneauHierarchie {
     
     public static void organismListDownloadEnd(Vector<Organism> list){
     	majHierarchieListeOrganismes(list);
-    	supprimeBarreTelechargement();
+    	//supprimeBarreTelechargement();
     	PanneauControle.unblockStart();
     	return;
     }

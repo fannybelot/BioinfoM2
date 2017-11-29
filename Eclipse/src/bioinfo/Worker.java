@@ -1,5 +1,7 @@
 package bioinfo;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.Vector;
 
 import excel.Writer;
@@ -41,10 +43,18 @@ public class Worker extends Thread {
 							" dans le thread "+numero_de_thread);
 					InterfaceUtilisateur.unGenomeReussi(orga.getName());
 				}
-				catch(Exception e ){
-					InterfaceUtilisateur.journalise("Warning", "Traitement de "+orga.getName()+" raté"+
-							" dans le thread "+numero_de_thread);
-					InterfaceUtilisateur.unGenomeRate();
+				catch(Exception e){
+					System.out.println(e.getMessage());
+					if (e.getMessage().contains("Server returned HTTP response code: 502 for URL")) {
+						joblist.insertElementAt(orga, 0);
+						InterfaceUtilisateur.journalise("Warning", "Traitement de "+orga.getName()+" raté"+
+								" dans le thread "+numero_de_thread + " (502 Bad Gateway). Nouvel essai.");
+					}
+					else {
+						InterfaceUtilisateur.journalise("Warning", "Traitement de "+orga.getName()+" raté"+
+								" dans le thread "+numero_de_thread + ". Exception "+e);
+						InterfaceUtilisateur.unGenomeRate();
+					}
 				}
 				orga.deleteDechet();
 			}

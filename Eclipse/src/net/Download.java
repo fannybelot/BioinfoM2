@@ -104,7 +104,6 @@ public class Download {
 		threads.add(new DownloadThread(this.archaea, "Archaea"));
 		threads.add(new DownloadThread(this.bacteria, "Bacteria"));
 		threads.add(new DownloadThread(this.eukaryota, "Eukaryota"));
-		threads.add(new DownloadThread(this.viroids, "Viroids"));
 		threads.add(new DownloadThread(this.viruses, "Viruses"));
 		for (DownloadThread dt : threads) {
 			dt.start();

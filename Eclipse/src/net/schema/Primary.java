@@ -8,15 +8,14 @@ import net.Download;
 
 public final class Primary extends Thread {
 	private static int JOB = 0;
-	private static Job[] JOBLIST = new Job[5];
+	private static Job[] JOBLIST = new Job[4];
 	private static Vector<Organism> ORGANISMS = new Vector<Organism>();
 	private static Secondary[] SECONDARIES = new Secondary[32];
 	static {
 		JOBLIST[0] = new Job("Archaea");
 		JOBLIST[1] = new Job("Bacteria");
 		JOBLIST[2] = new Job("Eukaryota");
-		JOBLIST[3] = new Job("Viroids");
-		JOBLIST[4] = new Job("Viruses");
+		JOBLIST[3] = new Job("Viruses");
 	}
 	
 	public static synchronized String page() {
