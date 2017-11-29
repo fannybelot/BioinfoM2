@@ -41,13 +41,13 @@ public class DownloadThread extends Thread {
 		return this.organisms;
 	}
 	
-	public Vector<String[]> getNcsList() {
+	/*public Vector<String[]> getNcsList() {
 		return this.ncsList;
 	}
 
 	public String getKingdom() {
 		return this.kingdom;
-	}
+	}*/
 
 	@Override
 	public void run() {
@@ -165,7 +165,7 @@ public class DownloadThread extends Thread {
 		return name;
 	}
 	
-	public void filterOrganisms() {
+	/*public void filterOrganisms() {
 		Iterator<Organism> it = this.organisms.iterator();
 		int i = 0;
 		int c = 0;
@@ -177,7 +177,7 @@ public class DownloadThread extends Thread {
 			}
 		}
 		System.out.println(this.kingdom + " Has NCs : " + i + "(" + c + ")");
-	}
+	}*/
 
 //	private void parsePage(String html) {
 //		Document doc = Jsoup.parse("<table>" + html + "</table>");
