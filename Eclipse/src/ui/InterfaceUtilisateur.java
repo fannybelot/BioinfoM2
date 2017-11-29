@@ -43,11 +43,11 @@ public class InterfaceUtilisateur {
 	}
 	
 	/**
-	 * À appeller pour créer et montrer l'interface au début du programme
+	 * À appeler pour créer et montrer l'interface au début du programme
 	 */
 	public static void CreeEtMontreFenetre() {
 		if(dejaCree){
-			journalise("DEBUG", "La fonction CreeEtMontreFenetre a été appellée alors que l'interface est déja créée.");
+			journalise("DEBUG", "La fonction CreeEtMontreFenetre a été appelée alors que l'interface est déja créée.");
 			return;
 		}
 		construitInterface();
@@ -62,9 +62,9 @@ public class InterfaceUtilisateur {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setPreferredSize(new Dimension(400, 100));
 		f.setResizable(false);
-		f.setTitle("Téléchargement de l'hiérarchie des genomes");
+		f.setTitle("Téléchargement de la hiérarchie des génomes");
 		
-		JLabel l = new JLabel("Téléchargement de l'hiérarchie des genomes en cours");
+		JLabel l = new JLabel("Téléchargement de la hiérarchie des génomes en cours");
 		
 		JProgressBar pb = new JProgressBar();
 		pb.setIndeterminate(true);
@@ -141,7 +141,7 @@ public class InterfaceUtilisateur {
 	
 	/**
 	 * Crée et configure le panneau des logs.
-	 * Cette fonction doit être appellée par "construitInterface"
+	 * Cette fonction doit être appelée par "construitInterface"
 	 */
 	private static void creePanneauLogs() {
 		panneauLog = new TextArea("Bonjour.\n", 5, 10);
@@ -158,7 +158,7 @@ public class InterfaceUtilisateur {
 	}
 	
 	/**
-	 * permet d'indiquer a l'UI le nombre total de génome qu'on
+	 * permet d'indiquer a l'UI le nombre total de génomes qu'on
 	 * prévoit de traiter
 	 * @param nombre
 	 * 

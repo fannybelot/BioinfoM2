@@ -3,6 +3,7 @@ package bioinfo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -53,6 +54,18 @@ public class NC {
 				gene.geneStatistique();
 				addSumCountPhase2(gene.getCountPhase2());
 				addSumCountPhase3(gene.getCountPhase3());
+//				File f = new File ("testBrugia");
+//				try
+//				{
+//				    FileWriter fw = new FileWriter (f,true);
+//			        fw.write (gene.getChaine());
+//			        fw.write (" \n");
+//				    fw.close();
+//				}
+//				catch (IOException exception)
+//				{
+//				    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
+//				}
 			}
 		}
 		this.frequencePreferentielle2 = frequencePref(this, 2);
@@ -117,7 +130,7 @@ public class NC {
 			if (! gene.calculCDS()){
 				numberInvalidCDS += 1;
 				it.remove();
-			};
+			}
 		}
 		Map<Integer, List<CDS>>[] startAndStopMap = calculStartAndStop();
 		Map<Integer, List<CDS>> startMap = startAndStopMap[0];
