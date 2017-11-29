@@ -24,6 +24,7 @@ import bioinfo.Organism;
 public final class Task {
 	private String kingdom;
 	private String page;
+	private volatile Vector<String[]> ncsList;
 
 	public Task(String kingdom, String page) {
 		this.kingdom = kingdom;
@@ -40,13 +41,8 @@ public final class Task {
 		try {
 			URI uri = new URIBuilder()
 					.setScheme("https")
-					.setHost("www.ncbi.nlm.nih.gov")
-					.setPath("/genomes/Genome2BE/genome2srv.cgi")
-					.setParameter("action", "GetGenomes4Grid")
-					.setParameter("king", kingdom)
-					.setParameter("mode", "2")
-					.setParameter("page", page)
-					.setParameter("pageSize", "100")
+					.setHost("ftp.ncbi.nlm.nih.gov")
+					.setPath("/genomes/GENOME_REPORTS/IDS/" + this.kingdom + ".ids")
 					.build();
 			
 			HttpGet httpget = new HttpGet(uri);
@@ -59,7 +55,7 @@ public final class Task {
 				BufferedReader in = new BufferedReader(new InputStreamReader(data));
 				String line;
 				while ((line = in.readLine()) != null) {
-					sb.append(line);
+					this.ncsList.add(line.split("\\t"));
 				}
 			} else {
 				System.out.println("Get " + kingdom + " (page " + page + ") failed : "
