@@ -50,7 +50,7 @@ public class Download {
 		try {
 			FileUtils.copyURLToFile(url, local_file);
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Erreur dans download : "+e.getMessage());
 		}
 	}
 	

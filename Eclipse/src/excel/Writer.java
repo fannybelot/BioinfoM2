@@ -566,8 +566,10 @@ public class Writer {
 	}
 	
 	public void write(Organism g) {
+		System.out.println("je suis dans write");
 		File file = new File("Results"+File.separator+g.getKingdom()+File.separator+g.getGroup()+File.separator+g.getSubGroup()+File.separator+g.getName()+".xlsx");
 		int[] info = {g.getNumberCDS(), g.getNumberInvalidCDS(), 1};
+		System.out.println("je suis dans write 2");
 		int[] genome = {g.countNCType("chromosome"),
 				g.countNCType("mitochondrion"),
 				g.countNCType("plast"),
@@ -575,6 +577,7 @@ public class Writer {
 				g.countNCType("DNA"),
 				g.countNCType("linkage"),
 				g.countNCType("others")};
+		System.out.println("je suis dans write 3");
 		String today = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		this.feuilleInfo(g.getName(), today, info, genome);
 		for (NC nc : g.getNCs()) {

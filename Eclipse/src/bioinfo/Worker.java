@@ -45,7 +45,7 @@ public class Worker extends Thread {
 					InterfaceUtilisateur.unGenomeReussi(orga.getName());
 				}
 				catch(Exception e){
-					System.out.println(e.getMessage());
+					System.out.println("Erreur dans worker : " + e);
 					if (e.getMessage().contains("Server returned HTTP response code: 502 for URL")) {
 						joblist.insertElementAt(orga, 0);
 						InterfaceUtilisateur.journalise("Warning", "Traitement de "+orga.getName()+" raté"+
