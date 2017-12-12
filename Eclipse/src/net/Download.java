@@ -2,6 +2,7 @@ package net;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +10,8 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
@@ -47,11 +50,21 @@ public class Download {
 	public static void getNC(String id, File local_file) throws Exception {
 		URL url = null;
 		url = new URL("https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&save=file&log$=seqview&db=nuccore&report=gbwithparts&sort=&from=begin&to=end&maxplex=3&id=" + id);
-		try {
+		/*try {
 			FileUtils.copyURLToFile(url, local_file);
 		} catch (IOException e) {
 			System.out.println("Erreur dans download : "+e.getMessage());
-		}
+		}*/
+		ReadableByteChannel rbc = Channels.newChannel(url.openStream());
+        try {
+		FileOutputStream fos = new FileOutputStream(local_file);
+        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        fos.close();
+        rbc.close();
+        } catch (IOException e) {
+        	System.out.println("Erreur dans download : "+e.getMessage());
+            e.printStackTrace();
+        }
 	}
 	
 //	public static void listOrganisms() throws IOException {
