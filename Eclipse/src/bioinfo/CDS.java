@@ -1,11 +1,47 @@
 package bioinfo;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 
 import excel.Writer;
 
 public class CDS {
+	private StringBuffer rawCDS;
+	private Boolean needComplement;
+	private List<Integer[]> intCDS;
+	private StringBuffer rawChaine;
+	private String chaine;
+	private int[][] countPhase2;
+
+	private float[][] frequencePhase2;
+
+	private int[][] countPhase3;
+
+	private float[][] frequencePhase3;
+	
+	private String filePath = "";
+	private File fichier;
+	private int CDSNumber = 1;
+
+	public CDS() {
+		this.rawCDS = new StringBuffer();
+		this.rawChaine = new StringBuffer();
+		this.needComplement = false;
+		this.intCDS = new ArrayList<Integer[]>();
+	}
+
+	public CDS(String filePath, int CDSNumber) {
+		this.rawCDS = new StringBuffer();
+		this.rawChaine = new StringBuffer();
+		this.needComplement = false;
+		this.intCDS = new ArrayList<Integer[]>();
+		this.filePath = filePath;
+		this.CDSNumber = CDSNumber;
+	}
 
 	private static Boolean verifCodon(String str) {
 		int len = str.length();
@@ -45,26 +81,6 @@ public class CDS {
 			return true;
 		} else
 			return false;
-	}
-	private StringBuffer rawCDS;
-	private Boolean needComplement;
-	private List<Integer[]> intCDS;
-	private StringBuffer rawChaine;
-	private String chaine;
-	private int[][] countPhase2;
-
-	private float[][] frequencePhase2;
-
-	private int[][] countPhase3;
-
-	private float[][] frequencePhase3;
-	
-
-	CDS() {
-		this.rawCDS = new StringBuffer();
-		this.rawChaine = new StringBuffer();
-		this.needComplement = false;
-		this.intCDS = new ArrayList<Integer[]>();
 	}
 
 	public void addRawCDS(String line) {
@@ -238,6 +254,13 @@ public class CDS {
 
 	public void finParsing() {
 		this.chaine = rawChaine.toString();
+		this.fichier = new File("genes" + File.separator + this.filePath + File.separator + "gene_" + this.CDSNumber + ".txt");
+		try {
+			FileUtils.writeStringToFile(this.fichier, this.chaine, "UTF-8", false);
+		} catch (IOException e) {
+			System.out.println("Failed to write gene " + e.getMessage());
+		}
+		
 	}
 
 	private float[][] frequencePhase(CDS g, int n) {

@@ -57,7 +57,7 @@ public class Worker extends Thread {
 						InterfaceUtilisateur.unGenomeRate();
 					}
 				}
-				orga.deleteDechet();
+				// orga.deleteDechet();
 			}
 			catch (ArrayIndexOutOfBoundsException e) {
 				//this error sometimes arises on joblist.remove(0); 

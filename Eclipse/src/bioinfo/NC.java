@@ -25,6 +25,7 @@ public class NC {
 	private String type;
 	private int [] [] trinucleoPhase;
 	private int [] [] dinucleoPhase;
+	private String filePath;
 	private String name;
 	private String id; //NC's id that is needed to download it with the url :
 					   //https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&save=file&log$=seqview&db=nuccore&report=gbwithparts&sort=&from=begin&to=end&maxplex=3&id=<ID>
@@ -38,6 +39,13 @@ public class NC {
 		this.numberCDS = 0;
 		this.numberInvalidCDS = 0;
 		this.id = id;
+	}
+	
+	public NC(String id, String filePath) {
+		this.numberCDS = 0;
+		this.numberInvalidCDS = 0;
+		this.id = id;
+		this.filePath = filePath;
 	}
 	
 	public void ncStatistique() {
@@ -95,7 +103,7 @@ public class NC {
 		String line;
 		while ((line = br.readLine()) != null ) {
 			if (line.startsWith("     CDS")) {
-				CDS cds = new CDS();
+				CDS cds = new CDS(this.filePath, numberCDS);
 				cds.addRawCDS(line);
 				while (line.endsWith(",")) {
 					line = br.readLine();
@@ -236,8 +244,8 @@ public class NC {
 	}
 	
 	public void download() throws Exception {
-		this.fichier = new File("genomes/"+id);
-		Download.getNC(this.id, fichier);
+		this.fichier = new File("genomes" + File.separator + this.filePath + File.separator + id + ".txt");
+		Download.getNC(this.id, this.fichier);
 	}
 	
 	private int[][] frequencePref(NC G, int n) {
