@@ -56,12 +56,6 @@ public class Download {
 		try {
 			URL url = null;
 			url = new URL("https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&save=file&log$=seqview&db=nuccore&report=gbwithparts&sort=&from=begin&to=end&maxplex=3&id=" + id);
-			/* Ancienne méthode
-			 * try {
-			FileUtils.copyURLToFile(url, local_file);
-			} catch (IOException e) {
-				System.out.println("Erreur dans download : "+e.getMessage());
-			}*/
 			ReadableByteChannel rbc = Channels.newChannel(url.openStream());
 			try {
 				FileOutputStream fos = new FileOutputStream(local_file);
