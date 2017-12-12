@@ -117,7 +117,6 @@ public class Download {
 		System.out.println("Archaea " + this.archaea.size());
 		System.out.println("Bacteria " + this.bacteria.size());
 		System.out.println("Eukaryota " + this.eukaryota.size());
-		System.out.println("Viroids " + this.viroids.size());
 		System.out.println("Viruses " + this.viruses.size());
 		Vector<Organism> organisms = new Vector<Organism>();
 		threads.add(new DownloadThread(this.archaea, "Archaea"));
@@ -232,9 +231,6 @@ public class Download {
 			break;
 		case "Eukaryota":
 			if (this.eukaryota.isEmpty() || !this.eukaryota.lastElement().getName().toLowerCase().equals(o.getName().toLowerCase())) this.eukaryota.add(o);
-			break;
-		case "Viroids":
-			if (this.viroids.isEmpty() || !this.viroids.lastElement().getName().toLowerCase().equals(o.getName().toLowerCase())) this.viroids.add(o);
 			break;
 		case "Viruses":
 			if (this.viruses.isEmpty() || !this.viruses.lastElement().getName().toLowerCase().equals(o.getName().toLowerCase())) this.viruses.add(o);

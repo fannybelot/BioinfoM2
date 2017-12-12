@@ -22,6 +22,9 @@ import bioinfo.Orchestreur;
 import bioinfo.Organism;
 import bioinfo.OrganismHierarchy;
 
+
+//TODO Ajouter bouton sauvegarder genes et sauvegarder genomes
+
 public class PanneauControle {
 	private static Boolean dejaCree = false; //indique si le panneau a été créé
 	private static JPanel panneauControle;
@@ -38,6 +41,8 @@ public class PanneauControle {
 	private static JProgressBar barreChargement;
 	private static JButton boutonPause;
 	private static JButton boutonStop;
+	private static JButton boutonHardStop;
+	
 	
 	private static Boolean pause;
 	
@@ -132,6 +137,17 @@ public class PanneauControle {
 		panneauLancement.setLayout(new BorderLayout());
 		panneauControle.add(panneauLancement, BorderLayout.PAGE_END);
 	
+		//insertion de la barre de chargement
+		barreChargement = new JProgressBar();
+		barreChargement.setMinimum(0);
+		barreChargement.setStringPainted(true);
+		panneauLancement.add(barreChargement, BorderLayout.SOUTH);
+		
+		//création d'un conteneur pour le bouton pause et le bouton stop
+		JPanel conteneurBoutons = new JPanel();
+		conteneurBoutons.setLayout(new BorderLayout());
+		panneauLancement.add(conteneurBoutons, BorderLayout.CENTER);
+
 		//insertion du bouton Start
 		boutonStart = new JButton("Start");
 		boutonStart.addActionListener(new ActionListener()
@@ -189,21 +205,11 @@ public class PanneauControle {
 					boutonStart.setEnabled(false);
 					boutonStop.setEnabled(true);
 					boutonPause.setEnabled(true);
+					boutonHardStop.setEnabled(true);
 				}
 			});
-		panneauLancement.add(boutonStart, BorderLayout.WEST);
+		conteneurBoutons.add(boutonStart, BorderLayout.WEST);
 	
-		//insertion de la barre de chargement
-		barreChargement = new JProgressBar();
-		barreChargement.setMinimum(0);
-		barreChargement.setStringPainted(true);
-		panneauLancement.add(barreChargement, BorderLayout.CENTER);
-		
-		//création d'un conteneur pour le bouton pause et le bouton stop
-		JPanel conteneurBoutons = new JPanel();
-		conteneurBoutons.setLayout(new BorderLayout());
-		panneauLancement.add(conteneurBoutons, BorderLayout.EAST);
-
 		//insertion du bouton pause
 		boutonPause = new JButton("Pause");
 		boutonPause.addActionListener(new ActionListener()
@@ -219,6 +225,7 @@ public class PanneauControle {
 					boutonStart.setEnabled(false);
 					boutonStop.setEnabled(true);
 					boutonPause.setEnabled(true);
+					boutonHardStop.setEnabled(true);
 				}
 				else {
 					fdp.pause();
@@ -229,17 +236,17 @@ public class PanneauControle {
 					boutonStop.setEnabled(false);
 					boutonPause.setEnabled(true);
 					boutonStart.setEnabled(false);
+					boutonHardStop.setEnabled(false);
 				}
 			}
 		});
-		//conteneurBoutons.add(boutonPause, BorderLayout.WEST);
+		conteneurBoutons.add(boutonPause, BorderLayout.CENTER);
 	
 		//insertion du bouton Stop
 		boutonStop = new JButton("Stop");
 		boutonStop.setEnabled(false);
 		boutonStop.addActionListener(new ActionListener()
 			{
-				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e)
 				{
 					orch.killWorkers();
@@ -249,12 +256,34 @@ public class PanneauControle {
 					boutonStart.setEnabled(true);
 					boutonStop.setEnabled(false);
 					boutonPause.setEnabled(false);
+					boutonHardStop.setEnabled(true);
 				}
 			});
 		conteneurBoutons.add(boutonStop, BorderLayout.EAST);
+
+		//insertion du bouton HardStop
+		boutonHardStop = new JButton("HardStop");
+		boutonHardStop.setEnabled(false);
+		boutonHardStop.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					orch.hardKillWorkers();
+					InterfaceUtilisateur.journalise("INFO", "Va te faire foutre sale merde.");
+
+					//met a jour les boutons
+					boutonStart.setEnabled(true);
+					boutonStop.setEnabled(false);
+					boutonHardStop.setEnabled(false);
+					boutonPause.setEnabled(false);
+				}
+			});
+		conteneurBoutons.add(boutonHardStop, BorderLayout.SOUTH);
+
 		
 		//initialise les boutons
 		boutonStop.setEnabled(false);
+		boutonHardStop.setEnabled(false);
 		boutonPause.setEnabled(false);
 	}
 	

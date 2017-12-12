@@ -54,7 +54,6 @@ public class InterfaceUtilisateur {
 		cadre.pack();
 		cadre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dejaCree = true;
-		System.out.println("je suis là");
 		Primary primary = new Primary();
 		primary.start();
 		JFrame f = new JFrame();
@@ -75,7 +74,6 @@ public class InterfaceUtilisateur {
 		p.setOpaque(true);
 		p.add(l);
 		p.add(pb);
-		System.out.println("je suis ici");
 		
 		
 		f.add(p);
@@ -86,10 +84,8 @@ public class InterfaceUtilisateur {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("je suis encore là");
 		f.dispose();
 		PanneauHierarchie.organismListDownloadEnd(Primary.organisms());
-		System.out.println("je suis toujours là");
 		
 		//Look inside folder /Results and set organisms that have a XLSX as "treated"
 		//these organisms will appear green in the hierarchy panel

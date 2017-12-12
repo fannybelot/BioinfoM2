@@ -42,10 +42,8 @@ public class Organism {
 	}
 	
 	public int countNCType(String type) {
-		System.out.println("je suis dans count nc type");
 		int res = 0;
 		for (NC nc: getNCs()){
-			System.out.println("je suis dans count nc type for");
 			if (nc.getType().equals(type)) {
 				res +=1;
 			}
@@ -64,7 +62,8 @@ public class Organism {
 		this.NCs = new ArrayList<NC>();
 		NC nc;
 		for (String nc_id: NCs_IDs){
-			nc = new NC(nc_id);
+			String filePath = this.kingdom + File.separator + this.group + File.separator + this.subGroup + File.separator + this.name;
+			nc = new NC(nc_id, filePath);
 			nc.download();
 			NCs.add(nc);
 		}
