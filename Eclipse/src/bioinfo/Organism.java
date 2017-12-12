@@ -62,7 +62,8 @@ public class Organism {
 		this.NCs = new ArrayList<NC>();
 		NC nc;
 		for (String nc_id: NCs_IDs){
-			nc = new NC(nc_id);
+			String filePath = this.kingdom + File.separator + this.group + File.separator + this.subGroup + File.separator + this.name;
+			nc = new NC(nc_id, filePath);
 			nc.download();
 			NCs.add(nc);
 		}
@@ -77,9 +78,7 @@ public class Organism {
 	
 	public void statistique() {
 		for ( NC nc : getNCs()) {
-			System.out.println("avant ncStatistique");//TODO
 			nc.ncStatistique();
-			System.out.println("après ncStatistique");//TODO
 			numberCDS += nc.getNumberCDS();
 			numberInvalidCDS += nc.getNumberInvalidCDS();
 		}

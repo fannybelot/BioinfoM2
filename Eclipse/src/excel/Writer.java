@@ -578,7 +578,9 @@ public class Writer {
 		String today = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		this.feuilleInfo(g.getName(), today, info, genome);
 		for (NC nc : g.getNCs()) {
+			System.out.println("avant feuilleNucléotide");
 			this.feuilleNucleotide(nc);
+			System.out.println("après feuilleNucléotide");
 		}
 		this.feuillesSomme();
 		this.print(file);
