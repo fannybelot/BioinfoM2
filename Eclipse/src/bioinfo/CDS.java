@@ -23,6 +23,7 @@ public class CDS {
 		Boolean res = true;
 		int i = 0;
 		int n = str.length();
+		System.out.println("taille str :"+str.length());
 		char t[] = { 'a', 't', 'c', 'g' };
 		char chars[] = str.toLowerCase().toCharArray();
 		while (res == true && i < n) {
