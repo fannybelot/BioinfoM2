@@ -42,10 +42,8 @@ public class Organism {
 	}
 	
 	public int countNCType(String type) {
-		System.out.println("je suis dans count nc type");
 		int res = 0;
 		for (NC nc: getNCs()){
-			System.out.println("je suis dans count nc type for");
 			if (nc.getType().equals(type)) {
 				res +=1;
 			}
