@@ -11,7 +11,7 @@ import ui.PanneauControle;
 import ui.PanneauControle.FournisseurDePause;
 
 public class Orchestreur implements Runnable {
-	static final int NOMBRE_DE_WORKERS = 16;
+	static final int NOMBRE_DE_WORKERS = 10;
 	FournisseurDePause p;
 	Vector<Organism> genomes;
 	List<Worker> workers;
@@ -52,6 +52,12 @@ public class Orchestreur implements Runnable {
 	public void killWorkers(){
 		for(Worker w : workers){
 			w.kill();
+		}
+	}
+	
+	public void hardKillWorkers(){
+		for(Worker w : workers){
+			w.hardKill();
 		}
 	}
 	

@@ -72,4 +72,9 @@ public class Worker extends Thread {
 		exit = true;
 	}
 	
+	@SuppressWarnings("deprecation")
+	public void hardKill() {
+		this.stop();
+	}
+	
 }
