@@ -83,7 +83,6 @@ public class NC {
 		BufferedReader br = new BufferedReader(fr);
 		String line;
 		while ((line = br.readLine()) != null ) {
-			System.out.println(line);
 			if (line.startsWith("     CDS")) {
 				CDS cds = new CDS();
 				cds.addRawCDS(line);

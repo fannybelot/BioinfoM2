@@ -79,7 +79,9 @@ public class Organism {
 	
 	public void statistique() {
 		for ( NC nc : getNCs()) {
+			System.out.println("avant ncStatistique");//TODO
 			nc.ncStatistique();
+			System.out.println("après ncStatistique");//TODO
 			numberCDS += nc.getNumberCDS();
 			numberInvalidCDS += nc.getNumberInvalidCDS();
 		}
