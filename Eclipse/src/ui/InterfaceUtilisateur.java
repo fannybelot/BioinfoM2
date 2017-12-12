@@ -3,6 +3,8 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.TextArea;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -60,6 +62,7 @@ public class InterfaceUtilisateur {
 		f.setVisible(true);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setPreferredSize(new Dimension(400, 100));
+		//f.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		f.setResizable(false);
 		f.setTitle("Téléchargement de la hiérarchie des génomes");
 		
@@ -104,6 +107,9 @@ public class InterfaceUtilisateur {
 		//Creation de la fenêtre
 		cadre = new javax.swing.JFrame("Bio - info");
 		cadre.setLocation(0, 0);
+		Rectangle maxBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().		        getMaximumWindowBounds();
+		cadre.setPreferredSize(new Dimension(maxBounds.width, maxBounds.height));
+
 
 		//Création du panneau intérieur
 		//(il faut d'abord créer le panneau de gauche et de droite)
