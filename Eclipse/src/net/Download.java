@@ -11,6 +11,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Timer;
 import java.util.Vector;
 
 import com.google.gson.Gson;
@@ -45,12 +46,22 @@ public class Download {
    }
 	
 	public static void getNC(String id, File local_file) throws Exception {
-		URL url = null;
-		url = new URL("https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&save=file&log$=seqview&db=nuccore&report=gbwithparts&sort=&from=begin&to=end&maxplex=3&id=" + id);
+		Timer timer = new Timer(true);
+		InterruptTimerTask interruptTimerTask = 
+		    new InterruptTimerTask(Thread.currentThread());
+		timer.schedule(interruptTimerTask, 1200000);
 		try {
-			FileUtils.copyURLToFile(url, local_file);
-		} catch (IOException e) {
-			System.out.println("Erreur dans download : "+e.getMessage());
+			URL url = null;
+			url = new URL("https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&save=file&log$=seqview&db=nuccore&report=gbwithparts&sort=&from=begin&to=end&maxplex=3&id=" + id);
+			try {
+				FileUtils.copyURLToFile(url, local_file);
+			} catch (IOException e) {
+				System.out.println("Erreur dans download : "+e.getMessage());
+			}
+		} catch (Exception e) {
+			System.out.println("Download NC timeout : " + e.getMessage());
+		} finally {
+		    timer.cancel();
 		}
 	}
 	
