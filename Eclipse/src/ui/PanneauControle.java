@@ -38,6 +38,8 @@ public class PanneauControle {
 	private static JProgressBar barreChargement;
 	private static JButton boutonPause;
 	private static JButton boutonStop;
+	private static JButton boutonHardStop;
+	
 	
 	private static Boolean pause;
 	
@@ -189,6 +191,7 @@ public class PanneauControle {
 					boutonStart.setEnabled(false);
 					boutonStop.setEnabled(true);
 					boutonPause.setEnabled(true);
+					boutonHardStop.setEnabled(true);
 				}
 			});
 		panneauLancement.add(boutonStart, BorderLayout.WEST);
@@ -219,6 +222,7 @@ public class PanneauControle {
 					boutonStart.setEnabled(false);
 					boutonStop.setEnabled(true);
 					boutonPause.setEnabled(true);
+					boutonHardStop.setEnabled(true);
 				}
 				else {
 					fdp.pause();
@@ -229,17 +233,17 @@ public class PanneauControle {
 					boutonStop.setEnabled(false);
 					boutonPause.setEnabled(true);
 					boutonStart.setEnabled(false);
+					boutonHardStop.setEnabled(false);
 				}
 			}
 		});
-		//conteneurBoutons.add(boutonPause, BorderLayout.WEST);
+		conteneurBoutons.add(boutonPause, BorderLayout.WEST);
 	
 		//insertion du bouton Stop
 		boutonStop = new JButton("Stop");
 		boutonStop.setEnabled(false);
 		boutonStop.addActionListener(new ActionListener()
 			{
-				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e)
 				{
 					orch.killWorkers();
@@ -249,12 +253,34 @@ public class PanneauControle {
 					boutonStart.setEnabled(true);
 					boutonStop.setEnabled(false);
 					boutonPause.setEnabled(false);
+					boutonHardStop.setEnabled(false);
 				}
 			});
 		conteneurBoutons.add(boutonStop, BorderLayout.EAST);
+
+		//insertion du bouton HardStop
+		boutonHardStop = new JButton("HardStop");
+		boutonHardStop.setEnabled(false);
+		boutonHardStop.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					orch.hardKillWorkers();
+					InterfaceUtilisateur.journalise("INFO", "Va te faire foutre sale merde.");
+
+					//met a jour les boutons
+					boutonStart.setEnabled(true);
+					boutonStop.setEnabled(false);
+					boutonHardStop.setEnabled(false);
+					boutonPause.setEnabled(false);
+				}
+			});
+		conteneurBoutons.add(boutonHardStop, BorderLayout.CENTER);
+
 		
 		//initialise les boutons
 		boutonStop.setEnabled(false);
+		boutonHardStop.setEnabled(false);
 		boutonPause.setEnabled(false);
 	}
 	

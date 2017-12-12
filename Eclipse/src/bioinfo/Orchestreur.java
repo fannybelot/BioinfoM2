@@ -55,6 +55,12 @@ public class Orchestreur implements Runnable {
 		}
 	}
 	
+	public void hardKillWorkers(){
+		for(Worker w : workers){
+			w.hardKill();
+		}
+	}
+	
 	@Override
 	public void run() {
 		for (Worker w : workers){

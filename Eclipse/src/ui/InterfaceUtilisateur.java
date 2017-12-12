@@ -54,7 +54,6 @@ public class InterfaceUtilisateur {
 		cadre.pack();
 		cadre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dejaCree = true;
-		System.out.println("je suis là");
 		Primary primary = new Primary();
 		primary.start();
 		JFrame f = new JFrame();
