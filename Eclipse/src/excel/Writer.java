@@ -262,6 +262,7 @@ public class Writer {
 	    		r = new Reader(f.getPath());
 	    		ajoutInfoTotal(r,info,genome);
 	    		ajoutNucleoTotal(r,valuesTrinucleo,valuesDinucleo,valuesInfos);
+	    		r.close();
 	    	}
 	    }
 	    feuilleInfo(folder.getName(), (new Date()).toString(), info, genome);

@@ -61,16 +61,6 @@ public class Download {
 			} catch (IOException e) {
 				System.out.println("Erreur dans download : "+e.getMessage());
 			}
-			/*ReadableByteChannel rbc = Channels.newChannel(url.openStream());
-			try {
-				FileOutputStream fos = new FileOutputStream(local_file);
-				fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-				fos.close();
-				rbc.close();
-			} catch (IOException e) {
-				System.out.println("Erreur dans download : "+e.getMessage());
-				e.printStackTrace();
-			}*/
 		} catch (Exception e) {
 			System.out.println("Download NC timeout : " + e.getMessage());
 		} finally {
