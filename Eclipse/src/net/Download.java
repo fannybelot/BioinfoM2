@@ -203,14 +203,14 @@ public class Download {
 		String[] lineData = line.split("\\t");
 		Organism organism = null;
 		if (lineData.length > 8) {
-			if (!(lineData[5] == "-" && lineData[6] == "-" && lineData[7] == "-")) {
+//			if (!(lineData[5] == "-" && lineData[6] == "-" && lineData[7] == "-")) {
 				String[] nameData = lineData[0].split("\\s");
 				String name = nameData.length > 1 ? nameData[0] + " " + nameData[1] : lineData[0];
 				organism = new Organism(name);
 				organism.setKingdom(lineData[1]);
 				organism.setGroup(lineData[2]);
 				organism.setSubGroup(lineData[3]);
-			}
+//			}
 		}
 		return organism;
 	}
