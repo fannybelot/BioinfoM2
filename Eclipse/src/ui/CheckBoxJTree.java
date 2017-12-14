@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.EventObject;
 import java.util.Vector;
@@ -54,11 +55,13 @@ public class CheckBoxJTree extends JTree {
     }
     
     public void setNodeColor(String nodeName, Color color){
-    	CheckBoxTreeNode node = findCheckBoxTreeNodeByName(nodeName);
-    	if(node == null) return;
-    	
-		node.setColor(color);
-		updateNodeColor((CheckBoxTreeNode) node.getParent());
+    	ArrayList<CheckBoxTreeNode> nodes = findCheckBoxTreeNodeByName(nodeName);
+    	if (findCheckBoxTreeNodeByName(nodeName).size() == 0) {
+    		for(CheckBoxTreeNode node : nodes) {
+    			node.setColor(color);
+    			updateNodeColor((CheckBoxTreeNode) node.getParent());
+    		}
+    	}
     	this.revalidate();
     	this.repaint();
     }
@@ -88,19 +91,20 @@ public class CheckBoxJTree extends JTree {
 		updateNodeColor((CheckBoxTreeNode) node.getParent());
     }
     
-	public CheckBoxTreeNode findCheckBoxTreeNodeByName(String name){
+	public ArrayList<CheckBoxTreeNode> findCheckBoxTreeNodeByName(String name){
 		@SuppressWarnings("unchecked")
 		Enumeration<DefaultMutableTreeNode> enumAll = root.depthFirstEnumeration();
 		DefaultMutableTreeNode curNode;
+		ArrayList<CheckBoxTreeNode> nodes = new ArrayList<CheckBoxTreeNode>();
 		while(enumAll.hasMoreElements()){
 			curNode = enumAll.nextElement();
 			if(curNode instanceof CheckBoxTreeNode){
 				if(curNode.toString().equals(name)){
-					return (CheckBoxTreeNode) curNode;
+					nodes.add((CheckBoxTreeNode) curNode);
 				}
 			}
 		}
-		return null;
+		return nodes;
 	}
 }
 

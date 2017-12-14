@@ -277,7 +277,7 @@ public class PanneauControle {
 				public void actionPerformed(ActionEvent e)
 				{
 					orch.hardKillWorkers();
-					InterfaceUtilisateur.journalise("INFO", "Va te faire foutre sale merde.");
+					InterfaceUtilisateur.journalise("INFO", "HardStop !");
 
 					//met a jour les boutons
 					boutonStart.setEnabled(true);

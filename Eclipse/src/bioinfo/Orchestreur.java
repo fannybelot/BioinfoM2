@@ -11,7 +11,7 @@ import ui.PanneauControle;
 import ui.PanneauControle.FournisseurDePause;
 
 public class Orchestreur implements Runnable {
-	static final int NOMBRE_DE_WORKERS = 10;
+	static final int NOMBRE_DE_WORKERS = 6;
 	FournisseurDePause p;
 	Vector<Organism> genomes;
 	List<Worker> workers;
