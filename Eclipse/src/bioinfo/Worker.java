@@ -12,11 +12,18 @@ public class Worker extends Thread {
 	private Vector<Organism> joblist;
 	private int numero_de_thread;
 	private volatile boolean exit = false;
+	private boolean saveGenome = false;
+	private boolean saveGene = false;
 
 
 	Worker(Vector<Organism> joblist, int num) {
 		this.joblist = joblist;
 		this.numero_de_thread = num;
+	}
+	
+	public void setSave(Boolean saveGenome, Boolean saveGene){
+		this.saveGenome = saveGenome;
+		this.saveGene = saveGene;
 	}
 
 	@Override
@@ -29,7 +36,7 @@ public class Worker extends Thread {
 				try {
 					InterfaceUtilisateur.journalise("Info", "Téléchargement de "+orga.getName()+
 							" dans le thread "+numero_de_thread);
-					orga.downloadNCs();
+					orga.downloadNCs(this.saveGene);
 					InterfaceUtilisateur.journalise("Info", "Fin du téléchargement, début du parsing de "+orga.getName()+
 							" dans le thread "+numero_de_thread);
 					orga.parse();
@@ -57,7 +64,9 @@ public class Worker extends Thread {
 						InterfaceUtilisateur.unGenomeRate();
 					}
 				}
-				// orga.deleteDechet();
+				if (this.saveGenome == false){
+					orga.deleteDechet();
+				}
 			}
 			catch (ArrayIndexOutOfBoundsException e) {
 				//this error sometimes arises on joblist.remove(0); 
