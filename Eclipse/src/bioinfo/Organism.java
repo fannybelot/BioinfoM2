@@ -137,7 +137,9 @@ public class Organism {
 	}
 	
 	public void addNC_ID (String NC) {
-		this.NCs_IDs.add(NC);
+		if(!this.NCs_IDs.contains(NC)) {
+			this.NCs_IDs.add(NC);
+		}
 	}
 
 	public String toString(){

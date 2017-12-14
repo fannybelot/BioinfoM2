@@ -54,7 +54,6 @@ public class NC {
 		Iterator<CDS> it = this.listeCDS.iterator();
 		System.out.println("avant while");
 		while (it.hasNext()) {
-			System.out.println("dans while");
 			CDS gene = it.next();
 			System.out.println("avant if");
 			if (!gene.verification()) {
@@ -136,6 +135,7 @@ public class NC {
 					this.type = "others";
 				}
 				this.name = this.type + "_" + this.fichier.getName();
+				System.out.println(name);
 			}
 			if (line.contains("ORIGIN")) {
 				break;
