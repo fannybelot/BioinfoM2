@@ -29,7 +29,9 @@ public class NC {
 	private String name;
 	private String id; //NC's id that is needed to download it with the url :
 					   //https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&save=file&log$=seqview&db=nuccore&report=gbwithparts&sort=&from=begin&to=end&maxplex=3&id=<ID>
+	private Boolean geneSauv = false;
 
+	
 	public NC() {
 		numberCDS = 0;
 		numberInvalidCDS = 0;
@@ -48,6 +50,10 @@ public class NC {
 		this.filePath = filePath;
 	}
 	
+	public void setSauv(Boolean s){
+		this.geneSauv = s;
+	}
+
 	public void ncStatistique() {
 		sumCountPhase2 = new int[2][16];
 		sumCountPhase3 = new int[3][64];
@@ -178,8 +184,10 @@ public class NC {
 		}
 		br.close();
 		fr.close();
-		for (CDS cds : listeCDS) {
-			cds.finParsing();
+		if (this.geneSauv == true){
+			for (CDS cds : listeCDS) {
+				cds.finParsing();
+			}
 		}
 	}
 

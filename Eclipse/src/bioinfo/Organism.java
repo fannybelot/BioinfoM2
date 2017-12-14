@@ -58,12 +58,13 @@ public class Organism {
 		NCs.clear();
 	}
 	
-	public void downloadNCs() throws Exception {
+	public void downloadNCs(Boolean saveGene) throws Exception {
 		this.NCs = new ArrayList<NC>();
 		NC nc;
 		for (String nc_id: NCs_IDs){
 			String filePath = this.kingdom + File.separator + this.group + File.separator + this.subGroup + File.separator + this.name;
 			nc = new NC(nc_id, filePath);
+			nc.setSauv(saveGene);
 			nc.download();
 			NCs.add(nc);
 		}

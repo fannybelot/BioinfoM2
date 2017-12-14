@@ -26,6 +26,7 @@ public class CDS {
 	private String filePath = "";
 	private File fichier;
 	private int CDSNumber = 1;
+	
 
 	public CDS() {
 		this.rawCDS = new StringBuffer();
@@ -42,7 +43,7 @@ public class CDS {
 		this.filePath = filePath;
 		this.CDSNumber = CDSNumber;
 	}
-
+	
 	private static Boolean verifCodon(String str) {
 		int len = str.length();
 		String init = str.substring(0, 3).toLowerCase();
