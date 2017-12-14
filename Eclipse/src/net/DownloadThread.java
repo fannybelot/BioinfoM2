@@ -51,7 +51,10 @@ public class DownloadThread extends Thread {
 
 	@Override
 	public void run() {
-		this.downloadNcsList();
+		this.downloadNcsList(this.kingdom);
+		if (this.kingdom == "Viruses") {
+			this.downloadNcsList("Phages");
+		}
 		if (!this.ncsList.isEmpty()) {
 			this.ncsList.sort(new Comparator<String[]>() {
 				@Override
@@ -91,13 +94,13 @@ public class DownloadThread extends Thread {
 		}
 	}
 
-	protected void downloadNcsList() {
+	protected void downloadNcsList(String filename) {
 		URI uri = null;
 		try {
 			uri = new URIBuilder()
 					.setScheme("https")
 					.setHost("ftp.ncbi.nlm.nih.gov")
-					.setPath("/genomes/GENOME_REPORTS/IDS/" + this.kingdom + ".ids")
+					.setPath("/genomes/GENOME_REPORTS/IDS/" + filename + ".ids")
 					.build();
 
 			HttpGet httpget = new HttpGet(uri);
