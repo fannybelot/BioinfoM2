@@ -183,10 +183,8 @@ public class NC {
 		}
 		br.close();
 		fr.close();
-		if (this.geneSauv == true){
-			for (CDS cds : listeCDS) {
-				cds.finParsing();
-			}
+		for (CDS cds : listeCDS) {
+			cds.finParsing(this.geneSauv);
 		}
 	}
 

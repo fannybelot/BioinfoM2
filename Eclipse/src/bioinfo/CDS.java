@@ -253,15 +253,16 @@ public class CDS {
 		return t;
 	}
 
-	public void finParsing() {
+	public void finParsing(Boolean saveGene) {
 		this.chaine = rawChaine.toString();
 		this.fichier = new File("genes" + File.separator + this.filePath + File.separator + "gene_" + this.CDSNumber + ".txt");
-		try {
-			FileUtils.writeStringToFile(this.fichier, this.chaine, "UTF-8", false);
-		} catch (IOException e) {
-			System.out.println("Failed to write gene " + e.getMessage());
+		if (saveGene == true){
+			try {
+				FileUtils.writeStringToFile(this.fichier, this.chaine, "UTF-8", false);
+			} catch (IOException e) {
+				System.out.println("Failed to write gene " + e.getMessage());
+			}
 		}
-		
 	}
 
 	private float[][] frequencePhase(CDS g, int n) {
