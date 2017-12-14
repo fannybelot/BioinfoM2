@@ -286,7 +286,7 @@ public class PanneauControle {
 					boutonPause.setEnabled(false);
 				}
 			});
-		conteneurBoutons.add(boutonHardStop, BorderLayout.SOUTH);
+		//conteneurBoutons.add(boutonHardStop, BorderLayout.SOUTH);
 
 		
 		//initialise les boutons

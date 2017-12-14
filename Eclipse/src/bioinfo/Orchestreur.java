@@ -32,20 +32,24 @@ public class Orchestreur implements Runnable {
 	
 	public void createTotals(){
 		File results = new File("Results");
-		Writer w;
 		for(File kingdom:results.listFiles(Writer.getFolderFilter())){
-			for(File group:kingdom.listFiles(Writer.getFolderFilter())){
-				for(File subGroup:group.listFiles(Writer.getFolderFilter())){
-					w = new Writer();
-					w.createTotalSubGroup(subGroup);
-					w.close();
-				}
-				w = new Writer();
-				w.createTotalGroupOrKingdom(group);
-				w.close();
+			createTotalsAux(kingdom);
+		}
+	}
+	
+	private void createTotalsAux(File folder){
+		Writer w;
+		if (folder.listFiles(Writer.getFolderFilter()).length == 0){//feuille de la hiérarchie
+			w = new Writer();
+			w.createTotalSubGroup(folder);
+			w.close();
+		}
+		else{
+			for(File subFolder:folder.listFiles(Writer.getFolderFilter())){
+				createTotalsAux(subFolder);
 			}
 			w = new Writer();
-			w.createTotalGroupOrKingdom(kingdom);
+			w.createTotalGroupOrKingdom(folder);
 			w.close();
 		}
 	}

@@ -58,16 +58,16 @@ public class NC {
 		sumCountPhase2 = new int[2][16];
 		sumCountPhase3 = new int[3][64];
 		Iterator<CDS> it = this.listeCDS.iterator();
-		System.out.println("avant while");
+		//System.out.println("avant while");
 		while (it.hasNext()) {
 			CDS gene = it.next();
-			System.out.println("avant if");
+			//System.out.println("avant if");
 			if (!gene.verification()) {
-				System.out.println("dans if");
+				//System.out.println("dans if");
 				numberInvalidCDS += 1;
 				it.remove();
 			} else {
-				System.out.println("dans else");
+				//System.out.println("dans else");
 				gene.geneStatistique();
 				addSumCountPhase2(gene.getCountPhase2());
 				addSumCountPhase3(gene.getCountPhase3());
@@ -85,20 +85,20 @@ public class NC {
 //				}
 			}
 		}
-		System.out.println("apres while");
+		//System.out.println("apres while");
 		
 		this.frequencePreferentielle2 = frequencePref(this, 2);
 		this.frequencePreferentielle3 = frequencePref(this, 3);
 		this.trinucleoPhase = new int[3][64];
 		this.dinucleoPhase = new int[2][16];
 
-		System.out.println("avant for");
+		//System.out.println("avant for");
 		for (CDS cds : getCDS()) {
-			System.out.println("pendant while");
+			//System.out.println("pendant while");
 			trinucleoPhase = addition(cds.getCountPhase3(), trinucleoPhase);
 			dinucleoPhase = addition(cds.getCountPhase2(), dinucleoPhase);
 		}
-		System.out.println("apres for");
+		//System.out.println("apres for");
 	}
 
 	public void parse() throws IOException {
