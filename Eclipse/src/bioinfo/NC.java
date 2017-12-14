@@ -141,7 +141,6 @@ public class NC {
 					this.type = "others";
 				}
 				this.name = this.type + "_" + this.fichier.getName();
-				//System.out.println(name);
 			}
 			if (line.contains("ORIGIN")) {
 				break;
