@@ -386,6 +386,7 @@ public class Writer {
 					int[][] trinucleoPhase, int[][] trinucleoPrefPhase, 
 					int[][] dinucleoPhase, int[][] dinucleoPrefPhase, 
 					int nbCDS, int nbInvalidCDS) {
+		System.out.println(sheetName);
 		XSSFSheet s = wb.createSheet(sheetName);
 		XSSFRow r = s.createRow(0);
 		XSSFCell cell;

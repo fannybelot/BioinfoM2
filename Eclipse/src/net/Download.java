@@ -34,7 +34,6 @@ public class Download {
 	private Vector<Organism> archaea = new Vector<Organism>();
 	private Vector<Organism> bacteria = new Vector<Organism>();
 	private Vector<Organism> eukaryota = new Vector<Organism>();
-	private Vector<Organism> viroids = new Vector<Organism>();
 	private Vector<Organism> viruses = new Vector<Organism>();
 	private static Download instance = null;
 	
@@ -52,17 +51,17 @@ public class Download {
 		Timer timer = new Timer(true);
 		InterruptTimerTask interruptTimerTask = 
 		    new InterruptTimerTask(Thread.currentThread());
-		timer.schedule(interruptTimerTask, 1200000);
+		timer.schedule(interruptTimerTask, 600000);
 		try {
 			URL url = null;
 			url = new URL("https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&save=file&log$=seqview&db=nuccore&report=gbwithparts&sort=&from=begin&to=end&maxplex=3&id=" + id);
-			/* Ancienne méthode
-			 * try {
+			//Ancienne méthode
+			try {
 			FileUtils.copyURLToFile(url, local_file);
 			} catch (IOException e) {
 				System.out.println("Erreur dans download : "+e.getMessage());
-			}*/
-			ReadableByteChannel rbc = Channels.newChannel(url.openStream());
+			}
+			/*ReadableByteChannel rbc = Channels.newChannel(url.openStream());
 			try {
 				FileOutputStream fos = new FileOutputStream(local_file);
 				fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
@@ -71,7 +70,7 @@ public class Download {
 			} catch (IOException e) {
 				System.out.println("Erreur dans download : "+e.getMessage());
 				e.printStackTrace();
-			}
+			}*/
 		} catch (Exception e) {
 			System.out.println("Download NC timeout : " + e.getMessage());
 		} finally {
