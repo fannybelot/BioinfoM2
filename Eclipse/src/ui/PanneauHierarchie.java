@@ -156,6 +156,7 @@ public class PanneauHierarchie {
     }
     
     public static void setOrganismColor(String orgaName, Color color){
+    	System.out.println(orgaName);
     	arbreHierarchie.setNodeColor(orgaName, color);
     }
     

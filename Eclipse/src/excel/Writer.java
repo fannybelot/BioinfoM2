@@ -235,7 +235,8 @@ public class Writer {
 	    	for (File file:subfolder.listFiles(totalFilter)){
 		    	r = new Reader(file.getPath());
 		    	ajoutInfoTotal(r,info,genome);
-		   		ajoutNucleoTotal(r,valuesTrinucleo,valuesDinucleo,valuesInfos);	    		
+		   		ajoutNucleoTotal(r,valuesTrinucleo,valuesDinucleo,valuesInfos);
+		   		//r.close();
 	    	}
 	   	}
 	    feuilleInfo(folder.getName(), (new Date()).toString(), info, genome);
@@ -262,7 +263,7 @@ public class Writer {
 	    		r = new Reader(f.getPath());
 	    		ajoutInfoTotal(r,info,genome);
 	    		ajoutNucleoTotal(r,valuesTrinucleo,valuesDinucleo,valuesInfos);
-	    		r.close();
+	    		//r.close();
 	    	}
 	    }
 	    feuilleInfo(folder.getName(), (new Date()).toString(), info, genome);
@@ -387,7 +388,7 @@ public class Writer {
 					int[][] trinucleoPhase, int[][] trinucleoPrefPhase, 
 					int[][] dinucleoPhase, int[][] dinucleoPrefPhase, 
 					int nbCDS, int nbInvalidCDS) {
-		System.out.println(sheetName);
+		//System.out.println(sheetName);
 		XSSFSheet s = wb.createSheet(sheetName);
 		XSSFRow r = s.createRow(0);
 		XSSFCell cell;
@@ -580,9 +581,7 @@ public class Writer {
 		String today = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		this.feuilleInfo(g.getName(), today, info, genome);
 		for (NC nc : g.getNCs()) {
-			System.out.println("avant feuilleNucléotide");
 			this.feuilleNucleotide(nc);
-			System.out.println("après feuilleNucléotide");
 		}
 		this.feuillesSomme();
 		this.print(file);

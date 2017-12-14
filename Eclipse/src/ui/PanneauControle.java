@@ -11,6 +11,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -42,6 +43,8 @@ public class PanneauControle {
 	private static JButton boutonPause;
 	private static JButton boutonStop;
 	private static JButton boutonHardStop;
+	private static JCheckBox genomeSauv;
+	private static JCheckBox geneSauv;
 	
 	
 	private static Boolean pause;
@@ -95,6 +98,9 @@ public class PanneauControle {
 		quoiTraiter.add(traiterPasTraites);
 		quoiTraiter.add(traiterCoches);
 		
+		geneSauv = new JCheckBox("Sauvegarder les gènes");
+		genomeSauv = new JCheckBox("Sauvegarder les génomes");
+		
 		JLabel label = new JLabel("Canaux de journalisation activés :");
 		canaux = new JTextArea();
 		JScrollPane panneauDefilementCanaux = new JScrollPane(canaux); 
@@ -112,6 +118,8 @@ public class PanneauControle {
 		panneauOptions.add(toutTraiter);
 		panneauOptions.add(traiterPasTraites);
 		panneauOptions.add(traiterCoches);
+		panneauOptions.add(geneSauv);
+		panneauOptions.add(genomeSauv);
 		panneauOptions.add(label);
 		panneauOptions.add(panneauDefilementCanaux);
 		panneauOptions.add(Box.createVerticalGlue());
@@ -197,7 +205,7 @@ public class PanneauControle {
 					if(orgas == null) return;
 
 					InterfaceUtilisateur.donneNbGenomeTotal(orgas.size());
-					orch = new Orchestreur(fdp, orgas);
+					orch = new Orchestreur(fdp, orgas, genomeSauv.isSelected(), geneSauv.isSelected());
 					thread_orch = new Thread(orch);
 					thread_orch.start();
 					
@@ -278,7 +286,7 @@ public class PanneauControle {
 					boutonPause.setEnabled(false);
 				}
 			});
-		conteneurBoutons.add(boutonHardStop, BorderLayout.SOUTH);
+		//conteneurBoutons.add(boutonHardStop, BorderLayout.SOUTH);
 
 		
 		//initialise les boutons

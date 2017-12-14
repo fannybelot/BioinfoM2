@@ -73,6 +73,9 @@ public class ConstructeurDeHierarchie {
 	public static Organism jsonObjectToOrganism(JSONObject json){
 		Vector<String> liste_NCsIDs = new Vector<String>();
 		JSONArray liste_IDs_json = json.getJSONArray("NCs_IDs");
+		for (Object id : liste_IDs_json) {
+			System.out.println("ID_json : "+id);
+		}
 		for (int i = 0; i < liste_IDs_json.length(); i++){
 			liste_NCsIDs.add(liste_IDs_json.getString(i));
 		}

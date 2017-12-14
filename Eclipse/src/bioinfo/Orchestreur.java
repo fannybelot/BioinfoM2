@@ -16,7 +16,7 @@ public class Orchestreur implements Runnable {
 	Vector<Organism> genomes;
 	List<Worker> workers;
 	
-	public Orchestreur(FournisseurDePause pause, Vector<Organism> genomes){
+	public Orchestreur(FournisseurDePause pause, Vector<Organism> genomes, Boolean genomeSauv, Boolean geneSauv){
 		p = pause;
 		Worker w;
 		this.workers = new ArrayList<Worker>();
@@ -25,6 +25,7 @@ public class Orchestreur implements Runnable {
 		InterfaceUtilisateur.donneNbGenomeTotal(genomes.size());
 		for(int i=0; i<NOMBRE_DE_WORKERS; i++){
 			w = new Worker(genomes,i);
+			w.setSave(genomeSauv, geneSauv);
 			workers.add(w);
 		}
 	}

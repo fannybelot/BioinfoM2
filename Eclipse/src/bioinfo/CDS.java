@@ -26,6 +26,7 @@ public class CDS {
 	private String filePath = "";
 	private File fichier;
 	private int CDSNumber = 1;
+	
 
 	public CDS() {
 		this.rawCDS = new StringBuffer();
@@ -42,7 +43,7 @@ public class CDS {
 		this.filePath = filePath;
 		this.CDSNumber = CDSNumber;
 	}
-
+	
 	private static Boolean verifCodon(String str) {
 		int len = str.length();
 		String init = str.substring(0, 3).toLowerCase();
@@ -59,7 +60,7 @@ public class CDS {
 		Boolean res = true;
 		int i = 0;
 		int n = str.length();
-		System.out.println("taille str :"+str.length());
+		//System.out.println("taille str :"+str.length());
 		char t[] = { 'a', 't', 'c', 'g' };
 		char chars[] = str.toLowerCase().toCharArray();
 		while (res == true && i < n) {
@@ -252,15 +253,16 @@ public class CDS {
 		return t;
 	}
 
-	public void finParsing() {
+	public void finParsing(Boolean saveGene) {
 		this.chaine = rawChaine.toString();
 		this.fichier = new File("genes" + File.separator + this.filePath + File.separator + "gene_" + this.CDSNumber + ".txt");
-		try {
-			FileUtils.writeStringToFile(this.fichier, this.chaine, "UTF-8", false);
-		} catch (IOException e) {
-			System.out.println("Failed to write gene " + e.getMessage());
+		if (saveGene == true){
+			try {
+				FileUtils.writeStringToFile(this.fichier, this.chaine, "UTF-8", false);
+			} catch (IOException e) {
+				System.out.println("Failed to write gene " + e.getMessage());
+			}
 		}
-		
 	}
 
 	private float[][] frequencePhase(CDS g, int n) {

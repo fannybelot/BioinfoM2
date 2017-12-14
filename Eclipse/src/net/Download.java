@@ -57,7 +57,7 @@ public class Download {
 			url = new URL("https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&save=file&log$=seqview&db=nuccore&report=gbwithparts&sort=&from=begin&to=end&maxplex=3&id=" + id);
 			//Ancienne méthode
 			try {
-			FileUtils.copyURLToFile(url, local_file);
+				FileUtils.copyURLToFile(url, local_file);
 			} catch (IOException e) {
 				System.out.println("Erreur dans download : "+e.getMessage());
 			}
@@ -203,14 +203,14 @@ public class Download {
 		String[] lineData = line.split("\\t");
 		Organism organism = null;
 		if (lineData.length > 8) {
-			if (!(lineData[5] == "-" && lineData[6] == "-" && lineData[7] == "-")) {
+//			if (!(lineData[5] == "-" && lineData[6] == "-" && lineData[7] == "-")) {
 				String[] nameData = lineData[0].split("\\s");
 				String name = nameData.length > 1 ? nameData[0] + " " + nameData[1] : lineData[0];
 				organism = new Organism(name);
 				organism.setKingdom(lineData[1]);
 				organism.setGroup(lineData[2]);
 				organism.setSubGroup(lineData[3]);
-			}
+//			}
 		}
 		return organism;
 	}
