@@ -11,7 +11,7 @@ import ui.PanneauControle;
 import ui.PanneauControle.FournisseurDePause;
 
 public class Orchestreur implements Runnable {
-	static final int NOMBRE_DE_WORKERS = 6;
+	static final int NOMBRE_DE_WORKERS = 5;
 	FournisseurDePause p;
 	Vector<Organism> genomes;
 	List<Worker> workers;
@@ -31,10 +31,23 @@ public class Orchestreur implements Runnable {
 	}
 	
 	public void createTotals(){
-		File results = new File("Results");
-		for(File kingdom:results.listFiles(Writer.getFolderFilter())){
-			createTotalsAux(kingdom);
-		}
+ 		File results = new File("Results");
+		Writer w;
+ 		for(File kingdom:results.listFiles(Writer.getFolderFilter())){
+			for(File group:kingdom.listFiles(Writer.getFolderFilter())){
+				for(File subGroup:group.listFiles(Writer.getFolderFilter())){
+					w = new Writer();
+					w.createTotalSubGroup(subGroup);
+					w.close();
+				}
+				w = new Writer();
+				w.createTotalGroupOrKingdom(group);
+				w.close();
+			}
+			w = new Writer();
+			w.createTotalGroupOrKingdom(kingdom);
+			w.close();
+ 		}
 	}
 	
 	private void createTotalsAux(File folder){

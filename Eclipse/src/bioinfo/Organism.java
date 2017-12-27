@@ -21,24 +21,18 @@ public class Organism {
 	
 	public Organism(String name){
 		this.NCs = new ArrayList<NC>();
-		this.name = name;
+		this.name = rectifyName(name);
 	}
 	
-	/**
-	 * @param name must be a 2-word string.
-	 */
-	public Organism(String name, String kingdom, String group, String subGroup, Vector<String> NCs_IDs){
-		this.name = name;
-		this.kingdom = kingdom;
-		this.group = group;
-		this.subGroup = subGroup;
-		this.setNCs_IDs(NCs_IDs);
-	}
-
-	public void ajouteFichier(File file) {
-		NC nc = new NC();
-		nc.setFichier(file);
-		this.NCs.add(nc);
+	private String rectifyName(String name) {
+		for (int i=0; i<name.length(); i++) {
+			if(name.charAt(i)=='/') {
+				char[] tab = name.toCharArray();
+				tab[i] = '*';
+				name = String.valueOf(tab);
+			}
+		}
+		return name;
 	}
 	
 	public int countNCType(String type) {
@@ -106,7 +100,7 @@ public class Organism {
 	}
 	
 	public void setName(String name) {
-		this.name = name;
+		this.name = rectifyName(name);
 	}
 	
 	public Iterable<NC> getNCs() {

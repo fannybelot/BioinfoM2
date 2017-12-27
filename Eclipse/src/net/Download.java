@@ -51,7 +51,7 @@ public class Download {
 		Timer timer = new Timer(true);
 		InterruptTimerTask interruptTimerTask = 
 		    new InterruptTimerTask(Thread.currentThread());
-		timer.schedule(interruptTimerTask, 600000);
+		timer.schedule(interruptTimerTask, 12000000);
 		try {
 			URL url = null;
 			url = new URL("https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&save=file&log$=seqview&db=nuccore&report=gbwithparts&sort=&from=begin&to=end&maxplex=3&id=" + id);
@@ -59,7 +59,9 @@ public class Download {
 			try {
 				FileUtils.copyURLToFile(url, local_file);
 			} catch (IOException e) {
-				System.out.println("Erreur dans download : "+e.getMessage());
+				System.out.println("Erreur dans download : "+e.getMessage()); // erreur souvent : Premature EOF
+				System.out.println(id);
+				e.printStackTrace();
 			}
 		} catch (Exception e) {
 			System.out.println("Download NC timeout : " + e.getMessage());
@@ -211,6 +213,9 @@ public class Download {
 				organism.setGroup(lineData[2]);
 				organism.setSubGroup(lineData[3]);
 //			}
+		}
+		if (organism.getName().contains("*")) {
+			System.out.println(organism.getName());
 		}
 		return organism;
 	}

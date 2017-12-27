@@ -56,7 +56,7 @@ public class CheckBoxJTree extends JTree {
     
     public void setNodeColor(String nodeName, Color color){
     	ArrayList<CheckBoxTreeNode> nodes = findCheckBoxTreeNodeByName(nodeName);
-    	if (findCheckBoxTreeNodeByName(nodeName).size() == 0) {
+    	if (findCheckBoxTreeNodeByName(nodeName).size() != 0) {
     		for(CheckBoxTreeNode node : nodes) {
     			node.setColor(color);
     			updateNodeColor((CheckBoxTreeNode) node.getParent());

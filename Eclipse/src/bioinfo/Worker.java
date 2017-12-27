@@ -62,6 +62,7 @@ public class Worker extends Thread {
 						InterfaceUtilisateur.journalise("Warning", "Traitement de "+orga.getName()+" raté"+
 								" dans le thread "+numero_de_thread + ". Exception "+e);
 						InterfaceUtilisateur.unGenomeRate();
+						e.printStackTrace();
 					}
 				}
 				if (this.saveGenome == false){

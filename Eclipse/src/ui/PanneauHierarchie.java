@@ -22,7 +22,6 @@ import bioinfo.Organism;
 import bioinfo.OrganismHierarchy;
 import net.Download;
 import net.schema.Primary;
-import ui.ConstructeurDeHierarchie.ExceptionFichierListeGenomeAbsent;
 
 public class PanneauHierarchie {
 	private static JPanel panneauHierarchie;
@@ -186,6 +185,7 @@ public class PanneauHierarchie {
     	
     	for (final File fileEntry : listOfFiles) {
     		if (fileEntry.isDirectory()) {
+    			
     			fileNames.addAll(getAllFileNames(fileEntry));
     		} else {
     			fileNames.add(fileEntry.getName());
