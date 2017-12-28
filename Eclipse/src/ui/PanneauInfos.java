@@ -15,7 +15,7 @@ public class PanneauInfos extends JPanel{
 	public PanneauInfos()
 	{
 	    this.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("panneau d'informations"),
+                BorderFactory.createTitledBorder("Panneau d'informations"),
                 BorderFactory.createEmptyBorder(5,5,5,5)));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
