@@ -2,6 +2,7 @@ package bioinfo;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -103,8 +104,20 @@ public class NC {
 
 	public void parse() throws IOException {
 		this.listeCDS = new ArrayList<CDS>();
-		FileReader fr = new FileReader(fichier);
+		FileReader fr;
+		try {
+			fr = new FileReader(fichier);
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found " + fichier.getName());
+			return;
+		}
 		BufferedReader br = new BufferedReader(fr);
+//		try {
+//			br = new BufferedReader(fr);
+//		} catch (Exception e) {
+//			System.out.println("Can't initialize BufferedReader " + fichier.getName());
+//			return;
+//		}
 		String line;
 		while ((line = br.readLine()) != null ) {
 			if (line.startsWith("     CDS")) {
