@@ -36,7 +36,6 @@ public class PanneauControle {
 	
 	private static JPanel panneauOptions;
 	private static ButtonGroup quoiTraiter;
-	private static JTextArea canaux;
 	private static JPanel panneauLancement;
 	private static JButton boutonStart;
 	private static JProgressBar barreChargement;
@@ -51,7 +50,7 @@ public class PanneauControle {
 	
 	public static JPanel obtientPanneauControle(){
 		if(!dejaCree){
-			InterfaceUtilisateur.journalise("DEBUG", "obtientPanneauControle appellée alors que le panneau n'a pas été initialisé.");
+			InterfaceUtilisateur.journalise("DEBUG", "obtientPanneauControle appelée alors que le panneau n'a pas été initialisé.");
 		}
 		return panneauControle;
 	}
@@ -77,7 +76,7 @@ public class PanneauControle {
 	
 	/**
 	 * Crée et configure le panneau des options.
-	 * Cette fonction doit être appellée par "construitInterface"
+	 * Cette fonction doit être appelée par "construitInterface"
 	 */
 	private static void creePanneauOptions(){
 		//Création du panneau
@@ -101,40 +100,22 @@ public class PanneauControle {
 		geneSauv = new JCheckBox("Sauvegarder les gènes");
 		genomeSauv = new JCheckBox("Sauvegarder les génomes");
 		
-		JLabel label = new JLabel("Canaux de journalisation activés :");
-		canaux = new JTextArea();
-		JScrollPane panneauDefilementCanaux = new JScrollPane(canaux); 
-		canaux.setEditable(true);
-		canaux.append("debug\ninfo\nwarning\nerror");
-		
 		//mise en place des alignements
 		toutTraiter.setAlignmentX(Component.LEFT_ALIGNMENT);
 		traiterPasTraites.setAlignmentX(Component.LEFT_ALIGNMENT);
 		traiterCoches.setAlignmentX(Component.LEFT_ALIGNMENT);
-		label.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panneauDefilementCanaux.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
 		//insertion des options
 		panneauOptions.add(toutTraiter);
 		panneauOptions.add(traiterPasTraites);
 		panneauOptions.add(traiterCoches);
+		panneauOptions.add(Box.createVerticalStrut(20));
 		panneauOptions.add(geneSauv);
 		panneauOptions.add(genomeSauv);
-		panneauOptions.add(label);
-		panneauOptions.add(panneauDefilementCanaux);
 		panneauOptions.add(Box.createVerticalGlue());
 		//scrollPane.setPreferredSize(new Dimension(5, 5));
 	}
-	
-	/**
-	 * Renvoie Vrai si le canal passé en paramètre doit être affiché.
-	 * @param canal
-	 * @return
-	 */
-	public static Boolean estCanalAutorise(String canal){
-		return canaux.getText().toLowerCase().contains(canal.toLowerCase());
-	}
-	
+
 	/**
 	 * Crée et configure le panneau de lancement.
 	 * Cette fonction doit être appellée par "construitInterface".

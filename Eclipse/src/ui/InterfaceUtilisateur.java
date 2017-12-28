@@ -155,11 +155,9 @@ public class InterfaceUtilisateur {
 	}
 		
 	public static void journalise(String canal, String message){
-		if(PanneauControle.estCanalAutorise(canal)){
-			Calendar cal = Calendar.getInstance();
-	        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-			panneauLog.append(sdf.format(cal.getTime()) + " " + canal.toUpperCase() + " : " + message + "\n");
-		}
+		Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		panneauLog.append(sdf.format(cal.getTime()) + " " + canal.toUpperCase() + " : " + message + "\n");
 	}
 	
 	/**
