@@ -16,25 +16,10 @@ public class CDS {
 	private StringBuffer rawChaine;
 	private String chaine;
 	private StatsCDS statsCDS;
-	//private int[][] countPhase2;
-
-	//private float[][] frequencePhase2;
-
-	//private int[][] countPhase3;
-
-	//private float[][] frequencePhase3;
-	
 	private String filePath = "";
 	private File fichier;
 	private int CDSNumber = 1;
 	
-
-	/*public CDS() {
-		this.rawCDS = new StringBuffer();
-		this.rawChaine = new StringBuffer();
-		this.needComplement = false;
-		this.intCDS = new ArrayList<Integer[]>();
-	}*/
 
 	public CDS(String filePath, int CDSNumber) {
 		this.rawCDS = new StringBuffer();
@@ -216,44 +201,6 @@ public class CDS {
 			return 'c';
 	}
 
-	/*private int[][] comptagePhase(CDS g, int n) {
-		String s = g.chaine;
-		int t[][];
-		t = new int[n][(int) Math.pow(4, n)];
-		List<String> l = Writer.listeNucleotide(n);
-		for (int i = 0; i <= s.length() - 6; i = i + n) {
-			if (n == 2) {
-				String nucl0 = s.substring(i, i + n).toUpperCase();
-				String nucl1 = s.substring(i + 1, i + n + 1).toUpperCase();
-				for (int j = 0; j < 16; j++) {
-					if (nucl0.equals(l.get(j))) {
-						t[0][j] = t[0][j] + 1;
-					}
-					if (nucl1.equals(l.get(j))) {
-						t[1][j] = t[1][j] + 1;
-					}
-				}
-			} else if (n == 3) {
-				String nucl0 = s.substring(i, i + n).toUpperCase();
-				String nucl1 = s.substring(i + 1, i + n + 1).toUpperCase();
-				String nucl2 = s.substring(i + 2, i + n + 2).toUpperCase();
-				for (int j = 0; j < 64; j++) {
-					if (nucl0.equals(l.get(j))) {
-						t[0][j] = t[0][j] + 1;
-					}
-					if (nucl1.equals(l.get(j))) {
-						t[1][j] = t[1][j] + 1;
-					}
-					if (nucl2.equals(l.get(j))) {
-						t[2][j] = t[2][j] + 1;
-					}
-				}
-			}
-
-		}
-		return t;
-	}*/
-
 	public void finParsing(Boolean saveGene) {
 		this.chaine = rawChaine.toString();
 		this.fichier = new File("genes" + File.separator + this.filePath + File.separator + "gene_" + this.CDSNumber + ".txt");
@@ -266,23 +213,7 @@ public class CDS {
 		}
 	}
 
-	/*private float[][] frequencePhase(CDS g, int n) {
-		String s = g.chaine;
-		float freqt[][];
-		freqt = new float[n][(int) Math.pow(4, n)];
-		int t[][] = comptagePhase(g, n);
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < (int) Math.pow(4, n); j++)
-				freqt[i][j] = ((float) t[i][j]) / (s.length() / n);
-		}
-		return freqt;
-	}*/
-
 	public void geneStatistique() {
-		/*this.countPhase2 = comptagePhase(this, 2);
-		this.frequencePhase2 = frequencePhase(this, 2);
-		this.countPhase3 = comptagePhase(this, 3);
-		this.frequencePhase3 = frequencePhase(this, 3);*/
 		this.statsCDS.geneStatistique(this);
 	}
 	
@@ -295,22 +226,6 @@ public class CDS {
 		}
 		return false;
 	}
-
-	/*public int[][] getCountPhase2() {
-		return countPhase2;
-	}
-
-	public int[][] getCountPhase3() {
-		return countPhase3;
-	}
-
-	public float[][] getFrequencePhase2() {
-		return frequencePhase2;
-	}
-
-	public float[][] getFrequencePhase3() {
-		return frequencePhase3;
-	}*/
 	
 	public StatsCDS getStatsCDS() {
 		return this.statsCDS;
