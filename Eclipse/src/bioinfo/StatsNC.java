@@ -1,8 +1,6 @@
 package bioinfo;
 
-import java.io.File;
 import java.util.Iterator;
-import java.util.List;
 
 public class StatsNC {
 	private int[] freqPrefDiPhase0;
@@ -19,6 +17,10 @@ public class StatsNC {
 	
 	private int numberInvalidCDS;
 	
+	public int getNumberInvalidCDS() {
+		return numberInvalidCDS;
+	}
+
 	public StatsNC(){
 		trinucleoPhase0 = new int[64];
 		trinucleoPhase1 = new int[64];
@@ -36,35 +38,45 @@ public class StatsNC {
 	}
 	
 	private void frequencePrefDi(NC nc) {
+		float[] freq0;
+		float[] freq1;
+		//System.out.println(freqPrefDiPhase0[0]);
+		//System.out.println(freqPrefDiPhase0[1]);
+		//System.out.println(freqPrefDiPhase1[0]);
 		for (CDS g : nc.getCDS()) {
-			int[] freq0 = g.getStatsCDS().getFreqDiPhase0();
-			int[] freq1 = g.getStatsCDS().getFreqDiPhase1();
+			freq0 = g.getStatsCDS().getFreqDiPhase0();
+			freq1 = g.getStatsCDS().getFreqDiPhase1();
+			System.out.println(freq0[0]);
 			for (int i = 0; i < 16; i++) {
 				if (freq0[i] >= freq1[i]) {
-					freqPrefDiPhase0[i] += 1;
+					freqPrefDiPhase0[i] = freqPrefDiPhase0[i] + 1;
 				}
 				if (freq1[i] >= freq0[i]) {
-					freqPrefDiPhase1[i] += 1;
+					freqPrefDiPhase1[i] = freqPrefDiPhase1[i] + 1;
 				}
 			}
 		}
+
+		//System.out.println(freqPrefDiPhase0[0]);
+		//System.out.println(freqPrefDiPhase0[1]);
+		//System.out.println(freqPrefDiPhase1[0]);
 		return;
 	}
 	
 	private void frequencePrefTri(NC nc) {
 		for (CDS g : nc.getCDS()) {
-			int[] freq0 = g.getStatsCDS().getFreqTriPhase0();
-			int[] freq1 = g.getStatsCDS().getFreqTriPhase1();
-			int[] freq2 = g.getStatsCDS().getFreqTriPhase2();
+			float[] freq0 = g.getStatsCDS().getFreqTriPhase0();
+			float[] freq1 = g.getStatsCDS().getFreqTriPhase1();
+			float[] freq2 = g.getStatsCDS().getFreqTriPhase2();
 			for (int i = 0; i < 64; i++) {
 				if (freq0[i] >= freq1[i] && freq0[i] >= freq2[i]) {
-					freqPrefTriPhase0[i] += 1;
+					freqPrefTriPhase0[i] = freqPrefTriPhase0[i] + 1;
 				}
 				if (freq1[i] >= freq0[i] && freq1[i] >= freq2[i]) {
-					freqPrefTriPhase1[i] += 1;
+					freqPrefTriPhase1[i] = freqPrefTriPhase1[i] + 1;
 				}
 				if (freq2[i] >= freq0[i] && freq2[i] >= freq1[i]) {
-					freqPrefTriPhase2[i] += 1;
+					freqPrefTriPhase2[i] = freqPrefTriPhase2[i] + 1;
 				}
 			}
 		}

@@ -166,7 +166,7 @@ public class NC {
 			}
 		}
 		// On a tous les CDS il faut maintenant récup la chaine
-		Iterator<CDS> it = listeCDS.iterator();
+		Iterator<CDS> it = this.listeCDS.iterator();
 		while (it.hasNext()){
 			CDS gene = it.next();
 			if (! gene.calculCDS()){

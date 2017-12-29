@@ -12,11 +12,11 @@ public class StatsCDS {
 	private int [] dinucleoPhase0;
 	private int [] dinucleoPhase1;
 
-	private int[] freqDiPhase0;
-	private int[] freqDiPhase1;
-	private int[] freqTriPhase0;
-	private int[] freqTriPhase1;
-	private int[] freqTriPhase2;
+	private float[] freqDiPhase0;
+	private float[] freqDiPhase1;
+	private float[] freqTriPhase0;
+	private float[] freqTriPhase1;
+	private float[] freqTriPhase2;
 	
 	private int totalDi;
 	private int totalTri;
@@ -28,11 +28,11 @@ public class StatsCDS {
 		dinucleoPhase0 = new int[16];
 		dinucleoPhase1 = new int[16];
 
-		freqDiPhase0 = new int[16];
-		freqDiPhase1 = new int[16];
-		freqTriPhase0 = new int[64];
-		freqTriPhase1 = new int[64];
-		freqTriPhase2 = new int[64];
+		freqDiPhase0 = new float[16];
+		freqDiPhase1 = new float[16];
+		freqTriPhase0 = new float[64];
+		freqTriPhase1 = new float[64];
+		freqTriPhase2 = new float[64];
 		
 		totalDi = 0;
 		totalTri = 0;
@@ -88,16 +88,16 @@ public class StatsCDS {
 
 	private void frequenceDi() {
 		for (int i = 0; i < 16; i++) {
-			freqDiPhase0[i] = dinucleoPhase0[i]/totalDi;
-			freqDiPhase1[i] = dinucleoPhase1[i]/totalDi;
+			freqDiPhase0[i] = (float) dinucleoPhase0[i]/totalDi;
+			freqDiPhase1[i] = (float) dinucleoPhase1[i]/totalDi;
 		}
 		return;
 	}
 	private void frequenceTri() {
 		for (int i = 0; i < 64; i++) {
-			freqTriPhase0[i] = trinucleoPhase0[i]/totalTri;
-			freqTriPhase1[i] = trinucleoPhase1[i]/totalTri;
-			freqTriPhase2[i] = trinucleoPhase2[i]/totalTri;
+			freqTriPhase0[i] = (float) trinucleoPhase0[i]/totalTri;
+			freqTriPhase1[i] = (float) trinucleoPhase1[i]/totalTri;
+			freqTriPhase2[i] = (float) trinucleoPhase2[i]/totalTri;
 		}
 		return;
 	}
@@ -130,23 +130,23 @@ public class StatsCDS {
 		return dinucleoPhase1;
 	}
 
-	public int[] getFreqDiPhase0() {
+	public float[] getFreqDiPhase0() {
 		return freqDiPhase0;
 	}
 
-	public int[] getFreqDiPhase1() {
+	public float[] getFreqDiPhase1() {
 		return freqDiPhase1;
 	}
 
-	public int[] getFreqTriPhase0() {
+	public float[] getFreqTriPhase0() {
 		return freqTriPhase0;
 	}
 
-	public int[] getFreqTriPhase1() {
+	public float[] getFreqTriPhase1() {
 		return freqTriPhase1;
 	}
 
-	public int[] getFreqTriPhase2() {
+	public float[] getFreqTriPhase2() {
 		return freqTriPhase2;
 	}
 
