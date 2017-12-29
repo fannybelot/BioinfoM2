@@ -17,15 +17,16 @@ public class NC {
 
 	private File fichier;
 	private List<CDS> listeCDS;
-	private int[][] frequencePreferentielle2;
-	private int[][] frequencePreferentielle3;
-	private int[][] sumCountPhase2;
-	private int[][] sumCountPhase3;
+	private StatsNC statsNC;
+	/*private int[][] frequencePreferentielle2;
+	private int[][] frequencePreferentielle3;*/
+	/*private int[][] sumCountPhase2;
+	private int[][] sumCountPhase3;*/
 	private int numberCDS;
 	private int numberInvalidCDS;
 	private String type;
-	private int [] [] trinucleoPhase;
-	private int [] [] dinucleoPhase;
+	/*private int [] [] trinucleoPhase;
+	private int [] [] dinucleoPhase;*/
 	private String filePath;
 	private String name;
 	private String id; //NC's id that is needed to download it with the url :
@@ -33,31 +34,32 @@ public class NC {
 	private Boolean geneSauv = false;
 
 	
-	public NC() {
+	/*public NC() {
 		numberCDS = 0;
 		numberInvalidCDS = 0;
-	}
+	}*/
 	
-	public NC(String id) {
+	/*public NC(String id) {
 		this.numberCDS = 0;
 		this.numberInvalidCDS = 0;
 		this.id = id;
-	}
+	}*/
 	
 	public NC(String id, String filePath) {
 		this.numberCDS = 0;
 		this.numberInvalidCDS = 0;
 		this.id = id;
 		this.filePath = filePath;
+		this.statsNC = new StatsNC();
 	}
 	
 	public void setSauv(Boolean s){
 		this.geneSauv = s;
 	}
 
-	public void ncStatistique() {
-		sumCountPhase2 = new int[2][16];
-		sumCountPhase3 = new int[3][64];
+	/*public void ncStatistique() {
+		//sumCountPhase2 = new int[2][16];
+		//sumCountPhase3 = new int[3][64];
 		Iterator<CDS> it = this.listeCDS.iterator();
 		//System.out.println("avant while");
 		while (it.hasNext()) {
@@ -66,12 +68,12 @@ public class NC {
 			if (!gene.verification()) {
 				//System.out.println("dans if");
 				numberInvalidCDS += 1;
-				it.remove();
+				//it.remove();
 			} else {
 				//System.out.println("dans else");
 				gene.geneStatistique();
-				addSumCountPhase2(gene.getCountPhase2());
-				addSumCountPhase3(gene.getCountPhase3());
+				//addSumCountPhase2(gene.getCountPhase2());
+				//addSumCountPhase3(gene.getCountPhase3());
 //				File f = new File ("testBrugia");
 //				try
 //				{
@@ -100,6 +102,10 @@ public class NC {
 			dinucleoPhase = addition(cds.getCountPhase2(), dinucleoPhase);
 		}
 		//System.out.println("apres for");
+	}*/
+	
+	public void ncStatistique(){
+		this.statsNC.ncStatistique(this);
 	}
 
 	public void parse() throws IOException {
@@ -202,7 +208,7 @@ public class NC {
 	}
 
 
-	public int[][] addition(int[][] A, int[][] B) {
+	/*public int[][] addition(int[][] A, int[][] B) {
 		try {
 			int[][] add = A;
 			for (int i=0; i< B.length; i++) {
@@ -216,9 +222,9 @@ public class NC {
 			System.out.println("add 2 tab with different lengths !");
 		}
 		return A;
-	}
+	}*/
 
-	public void addSumCountPhase2(int[][] count) {
+	/*public void addSumCountPhase2(int[][] count) {
 		for (int i=0; i<2; i++) {
 			for (int j=0; j<16; j++) {
 				sumCountPhase2[i][j]+=count[i][j];
@@ -232,7 +238,7 @@ public class NC {
 				sumCountPhase3[i][j]+=count[i][j];
 			}
 		}
-	}
+	}*/
 
 	private Map<Integer, List<CDS>>[] calculStartAndStop(){
 		@SuppressWarnings("unchecked")
@@ -266,7 +272,7 @@ public class NC {
 		Download.getNC(this.id, this.fichier);
 	}
 	
-	private int[][] frequencePref(NC G, int n) {
+	/*private int[][] frequencePref(NC G, int n) {
 		int preft[][];
 		preft = new int[n][(int)Math.pow(4, n)];
 		for (CDS g : G.listeCDS) {
@@ -297,13 +303,13 @@ public class NC {
 			}
 		}
 		return preft;
-	}
+	}*/
 
 	public List<CDS> getCDS() {
 		return listeCDS;
 	}
 
-	public int[][] getDinucleoPhase() {
+	/*public int[][] getDinucleoPhase() {
 		return dinucleoPhase;
 	}
 
@@ -313,7 +319,7 @@ public class NC {
 
 	public int[][] getFrequencePreferentielle3() {
 		return frequencePreferentielle3;
-	}
+	}*/
 
 	public String getName() {
 		return name;
@@ -329,17 +335,17 @@ public class NC {
 		return numberInvalidCDS;
 	}
 
-	public int[][] getSumCountPhase2() {
+	/*public int[][] getSumCountPhase2() {
 		return sumCountPhase2;
 	}
 
 	public int[][] getSumCountPhase3() {
 		return sumCountPhase3;
-	}
+	}*/
 	
-	public int[][] getTrinucleoPhase() {
+	/*public int[][] getTrinucleoPhase() {
 		return trinucleoPhase;
-	}
+	}*/
 	
 	public String getType() {
 		return type;
@@ -347,5 +353,9 @@ public class NC {
 
 	public void setFichier(File fichier) {
 		this.fichier = fichier;
+	}
+
+	public StatsNC getStatsNC() {
+		return statsNC;
 	}
 }

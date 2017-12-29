@@ -15,25 +15,26 @@ public class CDS {
 	private List<Integer[]> intCDS;
 	private StringBuffer rawChaine;
 	private String chaine;
-	private int[][] countPhase2;
+	private StatsCDS statsCDS;
+	//private int[][] countPhase2;
 
-	private float[][] frequencePhase2;
+	//private float[][] frequencePhase2;
 
-	private int[][] countPhase3;
+	//private int[][] countPhase3;
 
-	private float[][] frequencePhase3;
+	//private float[][] frequencePhase3;
 	
 	private String filePath = "";
 	private File fichier;
 	private int CDSNumber = 1;
 	
 
-	public CDS() {
+	/*public CDS() {
 		this.rawCDS = new StringBuffer();
 		this.rawChaine = new StringBuffer();
 		this.needComplement = false;
 		this.intCDS = new ArrayList<Integer[]>();
-	}
+	}*/
 
 	public CDS(String filePath, int CDSNumber) {
 		this.rawCDS = new StringBuffer();
@@ -42,6 +43,7 @@ public class CDS {
 		this.intCDS = new ArrayList<Integer[]>();
 		this.filePath = filePath;
 		this.CDSNumber = CDSNumber;
+		this.statsCDS = new StatsCDS();
 	}
 	
 	private static Boolean verifCodon(String str) {
@@ -214,7 +216,7 @@ public class CDS {
 			return 'c';
 	}
 
-	private int[][] comptagePhase(CDS g, int n) {
+	/*private int[][] comptagePhase(CDS g, int n) {
 		String s = g.chaine;
 		int t[][];
 		t = new int[n][(int) Math.pow(4, n)];
@@ -250,7 +252,7 @@ public class CDS {
 
 		}
 		return t;
-	}
+	}*/
 
 	public void finParsing(Boolean saveGene) {
 		this.chaine = rawChaine.toString();
@@ -264,7 +266,7 @@ public class CDS {
 		}
 	}
 
-	private float[][] frequencePhase(CDS g, int n) {
+	/*private float[][] frequencePhase(CDS g, int n) {
 		String s = g.chaine;
 		float freqt[][];
 		freqt = new float[n][(int) Math.pow(4, n)];
@@ -274,13 +276,14 @@ public class CDS {
 				freqt[i][j] = ((float) t[i][j]) / (s.length() / n);
 		}
 		return freqt;
-	}
+	}*/
 
 	public void geneStatistique() {
-		this.countPhase2 = comptagePhase(this, 2);
+		/*this.countPhase2 = comptagePhase(this, 2);
 		this.frequencePhase2 = frequencePhase(this, 2);
 		this.countPhase3 = comptagePhase(this, 3);
-		this.frequencePhase3 = frequencePhase(this, 3);
+		this.frequencePhase3 = frequencePhase(this, 3);*/
+		this.statsCDS.geneStatistique(this);
 	}
 	
 	public boolean verification() {
@@ -293,7 +296,7 @@ public class CDS {
 		return false;
 	}
 
-	public int[][] getCountPhase2() {
+	/*public int[][] getCountPhase2() {
 		return countPhase2;
 	}
 
@@ -307,7 +310,12 @@ public class CDS {
 
 	public float[][] getFrequencePhase3() {
 		return frequencePhase3;
+	}*/
+	
+	public StatsCDS getStatsCDS() {
+		return this.statsCDS;
 	}
+
 
 	public int getLength2() {
 		return (chaine.length() / 2);
