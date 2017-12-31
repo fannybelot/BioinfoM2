@@ -46,12 +46,14 @@ public class CDS {
 	
 	private static Boolean verifCodon(String str) {
 		int len = str.length();
-		String init = str.substring(0, 3).toLowerCase();
-		String stop = str.substring(len - 3, len).toLowerCase();
-		if (init.equals("atg") || init.equals("ctg") || init.equals("ttg") || init.equals("gtg") || init.equals("ata")
-				|| init.equals("atc") || init.equals("att") || init.equals("tta")) {
-			if (stop.equals("taa") || stop.equals("tag") || stop.equals("tga") || stop.equals("tta")) {
-				return true;
+		if (len > 2) {
+			String init = str.substring(0, 3).toLowerCase();
+			String stop = str.substring(len - 3, len).toLowerCase();
+			if (init.equals("atg") || init.equals("ctg") || init.equals("ttg") || init.equals("gtg") || init.equals("ata")
+					|| init.equals("atc") || init.equals("att") || init.equals("tta")) {
+				if (stop.equals("taa") || stop.equals("tag") || stop.equals("tga") || stop.equals("tta")) {
+					return true;
+				}
 			}
 		}
 		return false;
