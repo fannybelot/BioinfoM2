@@ -66,7 +66,6 @@ public class Organism {
 	
 	public void parse() throws Exception {
 		for ( NC nc : getNCs()) {
-			
 			nc.parse();
 		}
 	}

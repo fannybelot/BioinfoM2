@@ -68,7 +68,7 @@ public class NC {
 				numberInvalidCDS += 1;
 				it.remove();
 			} else {
-				//System.out.println("dans else");
+				System.out.println("dans else");
 				gene.geneStatistique();
 				addSumCountPhase2(gene.getCountPhase2());
 				addSumCountPhase3(gene.getCountPhase3());
@@ -86,7 +86,7 @@ public class NC {
 //				}
 			}
 		}
-		//System.out.println("apres while");
+		System.out.println("apres while");
 		
 		this.frequencePreferentielle2 = frequencePref(this, 2);
 		this.frequencePreferentielle3 = frequencePref(this, 3);
@@ -94,12 +94,12 @@ public class NC {
 		this.dinucleoPhase = new int[2][16];
 
 		//System.out.println("avant for");
-		for (CDS cds : getCDS()) {
-			//System.out.println("pendant while");
+		for (CDS cds : listeCDS) {
+			System.out.println("pendant for");
 			trinucleoPhase = addition(cds.getCountPhase3(), trinucleoPhase);
 			dinucleoPhase = addition(cds.getCountPhase2(), dinucleoPhase);
 		}
-		//System.out.println("apres for");
+		System.out.println("apres for");
 	}
 
 	public void parse() throws IOException {
@@ -239,7 +239,7 @@ public class NC {
 		Map<Integer, List<CDS>>[] startAndStopMap = new Map[2];
 		Map<Integer,List<CDS>> startMap = new Hashtable<Integer, List<CDS>>();
 		Map<Integer,List<CDS>> stopMap = new Hashtable<Integer, List<CDS>>();
-		for(CDS cds: getCDS()){
+		for(CDS cds: listeCDS){
 			List<Integer[]> intCDS = cds.getIntCDS();
 			for (Integer[] startAndStop: intCDS){
 				if (! startMap.containsKey(startAndStop[0])){
