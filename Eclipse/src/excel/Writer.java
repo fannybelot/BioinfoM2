@@ -377,13 +377,9 @@ public class Writer {
 	public void feuilleNucleotide(NC nc){
 		String titre = nc.getName();
 		StatsNC stats = nc.getStatsNC();
-		/*int [][] trinucleoPhase = nc.getTrinucleoPhase();
-		int [][] dinucleoPhase = nc.getDinucleoPhase();
-		int[][] trinucleoPrefPhase = nc.getFrequencePreferentielle3();
-		int[][] dinucleoPrefPhase = nc.getFrequencePreferentielle2();*/
 		int nbCDS = nc.getNumberCDS();
 		int nbInvalidCDS = nc.getNumberInvalidCDS();
-		feuilleNucleotide(titre, /*trinucleoPhase, trinucleoPrefPhase, dinucleoPhase, dinucleoPrefPhase,*/ stats, nbCDS, nbInvalidCDS);
+		feuilleNucleotide(titre, stats, nbCDS, nbInvalidCDS);
 	}
 
 	private void feuilleNucleotide(String sheetName,StatsNC stats,int nbCDS, int nbInvalidCDS) {

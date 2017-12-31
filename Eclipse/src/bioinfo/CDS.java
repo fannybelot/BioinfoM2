@@ -33,12 +33,14 @@ public class CDS {
 	
 	private static Boolean verifCodon(String str) {
 		int len = str.length();
-		String init = str.substring(0, 3).toLowerCase();
-		String stop = str.substring(len - 3, len).toLowerCase();
-		if (init.equals("atg") || init.equals("ctg") || init.equals("ttg") || init.equals("gtg") || init.equals("ata")
-				|| init.equals("atc") || init.equals("att") || init.equals("tta")) {
-			if (stop.equals("taa") || stop.equals("tag") || stop.equals("tga") || stop.equals("tta")) {
-				return true;
+		if (len > 2) {
+			String init = str.substring(0, 3).toLowerCase();
+			String stop = str.substring(len - 3, len).toLowerCase();
+			if (init.equals("atg") || init.equals("ctg") || init.equals("ttg") || init.equals("gtg") || init.equals("ata")
+					|| init.equals("atc") || init.equals("att") || init.equals("tta")) {
+				if (stop.equals("taa") || stop.equals("tag") || stop.equals("tga") || stop.equals("tta")) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -201,6 +203,46 @@ public class CDS {
 			return 'c';
 	}
 
+	/*private int[][] comptagePhase(CDS g, int n) {
+		String s = g.chaine;
+		int t[][] = new int[n][(int) Math.pow(4, n)];
+		List<String> l = Writer.listeNucleotide(n);
+		int tailleChaine = s.length();
+		for (int i = 0; i <= tailleChaine - 6; i = i + n) {
+			if (n == 2) {
+				String nucl0 = s.substring(i, i + n).toUpperCase();
+				String nucl1 = s.substring(i + 1, i + n + 1).toUpperCase();
+				for (int j = 0; j < 16; j++) {
+					String str = l.get(j);
+					if (nucl0.equals(str)) {
+						t[0][j] = t[0][j] + 1;
+					}
+					if (nucl1.equals(str)) {
+						t[1][j] = t[1][j] + 1;
+					}
+				}
+			} else {
+				String nucl0 = s.substring(i, i + n).toUpperCase();
+				String nucl1 = s.substring(i + 1, i + n + 1).toUpperCase();
+				String nucl2 = s.substring(i + 2, i + n + 2).toUpperCase();
+				for (int j = 0; j < 64; j++) {
+					String str = l.get(j);
+					if (nucl0.equals(str)) {
+						t[0][j] = t[0][j] + 1;
+					}
+					if (nucl1.equals(str)) {
+						t[1][j] = t[1][j] + 1;
+					}
+					if (nucl2.equals(str)) {
+						t[2][j] = t[2][j] + 1;
+					}
+				}
+			}
+
+		}
+		return t;
+	}*/
+
 	public void finParsing(Boolean saveGene) {
 		this.chaine = rawChaine.toString();
 		this.fichier = new File("genes" + File.separator + this.filePath + File.separator + "gene_" + this.CDSNumber + ".txt");
@@ -216,6 +258,25 @@ public class CDS {
 	public void geneStatistique() {
 		this.statsCDS.geneStatistique(this);
 	}
+		
+	/*private float[][] frequencePhase(CDS g, int n, int[][] comptagePhaseN) {
+		String s = g.chaine;
+		int entier = (int) Math.pow(4, n);
+		float freqt[][] = new float[n][entier];
+		int taille = s.length() / n;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < entier; j++)
+				freqt[i][j] = ((float) comptagePhaseN[i][j]) / taille;
+		}
+		return freqt;
+	}
+
+	public void geneStatistique() {
+		this.countPhase2 = comptagePhase(this, 2);
+		this.frequencePhase2 = frequencePhase(this, 2, countPhase2);
+		this.countPhase3 = comptagePhase(this, 3);
+		this.frequencePhase3 = frequencePhase(this, 3, countPhase3);
+	}*/
 	
 	public boolean verification() {
 		if (verifCompo(chaine) && verifTaille(chaine)) {

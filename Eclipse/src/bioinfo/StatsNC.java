@@ -46,7 +46,7 @@ public class StatsNC {
 		for (CDS g : nc.getCDS()) {
 			freq0 = g.getStatsCDS().getFreqDiPhase0();
 			freq1 = g.getStatsCDS().getFreqDiPhase1();
-			System.out.println(freq0[0]);
+			//System.out.println(freq0[0]);
 			for (int i = 0; i < 16; i++) {
 				if (freq0[i] >= freq1[i]) {
 					freqPrefDiPhase0[i] = freqPrefDiPhase0[i] + 1;

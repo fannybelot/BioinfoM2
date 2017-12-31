@@ -42,7 +42,54 @@ public class NC {
 	
 	public void ncStatistique(){
 		this.statsNC.ncStatistique(this);
-	}
+}
+
+	/*public void ncStatistique() {
+		sumCountPhase2 = new int[2][16];
+		sumCountPhase3 = new int[3][64];
+		Iterator<CDS> it = this.listeCDS.iterator();
+		//System.out.println("avant while");
+		while (it.hasNext()) {
+			CDS gene = it.next();
+			//System.out.println("avant if");
+			if (!gene.verification()) {
+				//System.out.println("dans if");
+				numberInvalidCDS += 1;
+				it.remove();
+			} else {
+				System.out.println("dans else");
+				gene.geneStatistique();
+				addSumCountPhase2(gene.getCountPhase2());
+				addSumCountPhase3(gene.getCountPhase3());
+//				File f = new File ("testBrugia");
+//				try
+//				{
+//				    FileWriter fw = new FileWriter (f,true);
+//			        fw.write (gene.getChaine());
+//			        fw.write (" \n");
+//				    fw.close();
+//				}
+//				catch (IOException exception)
+//				{
+//				    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
+//				}
+			}
+		}
+		System.out.println("apres while");
+		
+		this.frequencePreferentielle2 = frequencePref(this, 2);
+		this.frequencePreferentielle3 = frequencePref(this, 3);
+		this.trinucleoPhase = new int[3][64];
+		this.dinucleoPhase = new int[2][16];
+
+		//System.out.println("avant for");
+		for (CDS cds : listeCDS) {
+			System.out.println("pendant for");
+			trinucleoPhase = addition(cds.getCountPhase3(), trinucleoPhase);
+			dinucleoPhase = addition(cds.getCountPhase2(), dinucleoPhase);
+		}
+		System.out.println("apres for");
+	}*/
 
 	public void parse() throws IOException {
 		this.listeCDS = new ArrayList<CDS>();
@@ -148,7 +195,7 @@ public class NC {
 		Map<Integer, List<CDS>>[] startAndStopMap = new Map[2];
 		Map<Integer,List<CDS>> startMap = new Hashtable<Integer, List<CDS>>();
 		Map<Integer,List<CDS>> stopMap = new Hashtable<Integer, List<CDS>>();
-		for(CDS cds: getCDS()){
+		for(CDS cds: listeCDS){
 			List<Integer[]> intCDS = cds.getIntCDS();
 			for (Integer[] startAndStop: intCDS){
 				if (! startMap.containsKey(startAndStop[0])){
