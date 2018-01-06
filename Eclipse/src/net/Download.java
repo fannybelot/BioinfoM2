@@ -214,6 +214,7 @@ public class Download {
 				organism.setSubGroup(lineData[3]);
 //			}
 		}
+		
 		return organism;
 	}
 	
