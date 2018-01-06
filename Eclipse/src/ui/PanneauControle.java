@@ -197,7 +197,7 @@ public class PanneauControle {
 					boutonHardStop.setEnabled(true);
 				}
 			});
-		conteneurBoutons.add(boutonStart, BorderLayout.WEST);
+		conteneurBoutons.add(boutonStart, BorderLayout.NORTH);
 	
 		//insertion du bouton pause
 		boutonPause = new JButton("Pause");
@@ -229,7 +229,7 @@ public class PanneauControle {
 				}
 			}
 		});
-		conteneurBoutons.add(boutonPause, BorderLayout.CENTER);
+		//conteneurBoutons.add(boutonPause, BorderLayout.CENTER);
 	
 		//insertion du bouton Stop
 		boutonStop = new JButton("Stop");
@@ -248,7 +248,7 @@ public class PanneauControle {
 					boutonHardStop.setEnabled(true);
 				}
 			});
-		conteneurBoutons.add(boutonStop, BorderLayout.EAST);
+		conteneurBoutons.add(boutonStop, BorderLayout.SOUTH);
 
 		//insertion du bouton HardStop
 		boutonHardStop = new JButton("HardStop");

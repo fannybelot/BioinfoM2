@@ -46,7 +46,7 @@ public class Worker extends Thread {
 					InterfaceUtilisateur.journalise("Info", "Fin du téléchargement, début du parsing de "+orga.getName()+
 							" dans le thread "+numero_de_thread);
 					orga.parseAndStat();
-					InterfaceUtilisateur.journalise("Info", "Fin de l'analyse, début de l'écriture de "+orga.getName()+
+					InterfaceUtilisateur.journalise("Info", "Fin du parsing, début de l'écriture de "+orga.getName()+
 							" dans le thread "+numero_de_thread);
 					w = new Writer();
 					w.write(orga);
