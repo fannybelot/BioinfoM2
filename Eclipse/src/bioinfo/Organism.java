@@ -1,6 +1,7 @@
 package bioinfo;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -76,6 +77,16 @@ public class Organism {
 			numberCDS += nc.getNumberCDS();
 			numberInvalidCDS += nc.getNumberInvalidCDS();
 		}
+	}
+	
+	public void parseAndStat() throws IOException {
+		for ( NC nc : getNCs()) {
+			nc.parse();
+			nc.ncStatistique();
+			numberCDS += nc.getNumberCDS();
+			numberInvalidCDS += nc.getNumberInvalidCDS();
+			nc.endParseAndStat();
+		}		
 	}
 	
 	public String getGroup() {

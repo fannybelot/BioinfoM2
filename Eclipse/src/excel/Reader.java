@@ -14,15 +14,16 @@ public class Reader {
 	
 	private XSSFWorkbook wb;
 	
-	public Reader(String nom){
-		try{
+	public Reader(String nom) throws Exception {
+		//try {
 			OPCPackage pkg = OPCPackage.open(new File(nom));
 			wb = new XSSFWorkbook(pkg);
 			pkg.close();
-		}
-		catch(IOException | InvalidFormatException e) {
-			e.printStackTrace();
-		}
+//		}
+//		catch(Exception e) {
+//			System.out.println("Incorrect file : " + nom);
+//			// e.printStackTrace();
+//		}
 	}
 	
 	public void close(){

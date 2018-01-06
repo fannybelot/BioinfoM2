@@ -214,9 +214,9 @@ public class Download {
 				organism.setSubGroup(lineData[3]);
 //			}
 		}
-		if (organism.getName().contains("*")) {
-			System.out.println(organism.getName());
-		}
+//		if (organism.getName().contains("*")) {
+//			System.out.println(organism.getName());
+//		}
 		return organism;
 	}
 	

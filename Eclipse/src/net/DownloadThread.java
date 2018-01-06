@@ -143,7 +143,12 @@ public class DownloadThread extends Thread {
 //				System.out.println(namesComparison + " " + o.getName() + " /// " + ncName);
 //			}
 			if (namesComparison == 0) {
-				o.addNC_ID(nc[1]);
+				if (nc[1].startsWith("NC_")) {
+					o.addNC_ID(nc[1]);
+				} 
+//				else {
+//					System.out.println("NOT NC " + nc[1]);
+//				}
 				this.organisms.set(id, o);
 				if (!itNcs.hasNext()) break;
 				nc = itNcs.next();

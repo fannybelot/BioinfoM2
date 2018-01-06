@@ -234,9 +234,16 @@ public class Writer {
 		int[] genome = new int[diff_types];
 	    for (File subfolder:folder.listFiles(folderFilter)) {
 	    	for (File file:subfolder.listFiles(totalFilter)){
-		    	r = new Reader(file.getPath());
-		    	ajoutInfoTotal(r,info,genome);
-		   		ajoutNucleoTotal(r,valuesTrinucleo,valuesDinucleo,valuesInfos);
+	    		try {
+	    			r = new Reader(file.getPath());
+		    		ajoutInfoTotal(r,info,genome);
+		    		ajoutNucleoTotal(r,valuesTrinucleo,valuesDinucleo,valuesInfos);
+	    		} catch (Exception e) {
+	    			System.out.println("Incorrect file : " + file.getPath());
+	    		}
+//		    	r = new Reader(file.getPath());
+//		    	ajoutInfoTotal(r,info,genome);
+//		   		ajoutNucleoTotal(r,valuesTrinucleo,valuesDinucleo,valuesInfos);
 		   		//r.close();
 	    	}
 	   	}
@@ -261,9 +268,13 @@ public class Writer {
 		int[] genome = new int[diff_types];
 	    for (File f:folder.listFiles(xlsxFilter)) {
 	    	if (!f.getName().startsWith("Total_")){
-	    		r = new Reader(f.getPath());
-	    		ajoutInfoTotal(r,info,genome);
-	    		ajoutNucleoTotal(r,valuesTrinucleo,valuesDinucleo,valuesInfos);
+	    		try {
+	    			r = new Reader(f.getPath());
+		    		ajoutInfoTotal(r,info,genome);
+		    		ajoutNucleoTotal(r,valuesTrinucleo,valuesDinucleo,valuesInfos);
+	    		} catch (Exception e) {
+	    			System.out.println("Incorrect file : " + f.getPath());
+	    		}
 	    		//r.close();
 	    	}
 	    }
@@ -512,130 +523,130 @@ public class Writer {
 			int[][] trinucleoPhase, int[][] trinucleoPrefPhase, 
 			int[][] dinucleoPhase, int[][] dinucleoPrefPhase, 
 			int nbCDS, int nbInvalidCDS) {
-XSSFSheet s = wb.createSheet(sheetName);
-XSSFRow r = s.createRow(0);
-XSSFCell cell;
-List<String> titres = listeTitreColonne(3);
-//Partie trinucleo
-//Création 1ere ligne
-int i=1;
-for(String str:titres){
-	cell = r.createCell(i);
-	cell.setCellStyle(styles.get("titre"));
-	cell.setCellValue(str);
-	i++;
-}
-//Création 1ere colonne
-List<String> nucleo = listeNucleotide(3);
-i=1;
-for(String str:nucleo){
-	r = s.createRow(i);
-	cell = r.createCell(0);
-	cell.setCellStyle(styles.get("titre"));
-	cell.setCellValue(str);
-	i++;
-}
-//Impressions valeurs
-for(i=0;i<3;i++){
-	setColonneInt(s, trinucleoPhase[i], 2*i+1, "int");
-	for(int j=0; j<64; j++){
-		r = s.getRow(j+1);
-		cell = r.createCell(2*i+2);
-		char col = (char) ('A'+2*i+1);
-		cell.setCellFormula(col+Integer.toString(j+2)+"*100/SUM("+col+"2:"+col+"65)");
-		cell.setCellStyle(styles.get("float"));
+		XSSFSheet s = wb.createSheet(sheetName);
+		XSSFRow r = s.createRow(0);
+		XSSFCell cell;
+		List<String> titres = listeTitreColonne(3);
+		//Partie trinucleo
+		//Création 1ere ligne
+		int i=1;
+		for(String str:titres){
+			cell = r.createCell(i);
+			cell.setCellStyle(styles.get("titre"));
+			cell.setCellValue(str);
+			i++;
+		}
+		//Création 1ere colonne
+		List<String> nucleo = listeNucleotide(3);
+		i=1;
+		for(String str:nucleo){
+			r = s.createRow(i);
+			cell = r.createCell(0);
+			cell.setCellStyle(styles.get("titre"));
+			cell.setCellValue(str);
+			i++;
+		}
+		//Impressions valeurs
+		for(i=0;i<3;i++){
+			setColonneInt(s, trinucleoPhase[i], 2*i+1, "int");
+			for(int j=0; j<64; j++){
+				r = s.getRow(j+1);
+				cell = r.createCell(2*i+2);
+				char col = (char) ('A'+2*i+1);
+				cell.setCellFormula(col+Integer.toString(j+2)+"*100/SUM("+col+"2:"+col+"65)");
+				cell.setCellStyle(styles.get("float"));
+			}
+			//setColonneFloat(s, trinucleoFreqPhase[i], 2*i+2, "float");
+		}
+		//if (n==3) temp=7 else temp=5;
+		for(i=0;i<3;i++){
+			setColonneInt(s, trinucleoPrefPhase[i], 7+i, "int");
+		}
+		//Calcul totaux
+		r = s.createRow(65);
+		cell = r.createCell(0);
+		cell.setCellValue("Total");
+		cell.setCellStyle(styles.get("titre"));
+		for(i=1;i<=6;i++){
+			cell = r.createCell(i);
+			char col = (char) ('A'+i);
+			cell.setCellFormula("SUM("+col+"2:"+col+"65)");
+			cell.setCellStyle(styles.get("titre"));
+		}
+		//Partie dinucleo
+		//Création 1ere ligne
+		titres = listeTitreColonne(2);
+		i=13;
+		r=s.getRow(0);
+		for(String str:titres){
+			cell = r.createCell(i);
+			cell.setCellStyle(styles.get("titre"));
+			cell.setCellValue(str);
+			i++;
+		}
+		//Création 1ere colonne
+		nucleo = listeNucleotide(2);
+		i=1;
+		for(String str:nucleo){
+			r = s.getRow(i);
+			cell = r.createCell(12);
+			cell.setCellStyle(styles.get("titre"));
+			cell.setCellValue(str);
+			i++;
+		}	
+		//Impressions valeurs
+		for(i=0;i<2;i++){
+			setColonneInt(s, dinucleoPhase[i], 13+2*i, "int");
+			for(int j=0; j<16; j++){
+				r = s.getRow(j+1);
+				cell = r.createCell(2*i+14);
+				char col = (char) ('A'+2*i+13);
+				cell.setCellFormula(col+Integer.toString(j+2)+"/SUM("+col+"2:"+col+"17)");
+				cell.setCellStyle(styles.get("float"));
+			}
+			//setColonneFloat(s, dinucleoFreqPhase[i], 13+2*i, "float");
+		}
+		for(i=0;i<2;i++){
+			setColonneInt(s, dinucleoPrefPhase[i], 17+i, "int");
+		}
+		//Calcul totaux
+		r = s.getRow(17);
+		cell = r.createCell(12);
+		cell.setCellValue("Total");
+		cell.setCellStyle(styles.get("titre"));
+		for(i=1;i<=4;i++){
+			cell = r.createCell(12+i);
+			char col = (char) ('M'+i);
+			cell.setCellFormula("SUM("+col+"2:"+col+"17)");
+			cell.setCellStyle(styles.get("titre"));
+		}
+		
+		//Informations
+		r = s.getRow(20);
+		cell = r.createCell(11);
+		cell.setCellValue("Informations");
+		cell.setCellStyle(styles.get("titre"));
+		
+		r = s.getRow(21);
+		cell = r.createCell(11);
+		cell.setCellValue("Number of CDS sequences");
+		cell.setCellStyle(styles.get("fonce"));
+		cell = r.createCell(12);
+		cell.setCellValue(nbCDS);
+		cell.setCellStyle(styles.get("int"));
+		
+		r = s.getRow(22);
+		cell = r.createCell(11);
+		cell.setCellValue("Number of invalid CDS");
+		cell.setCellStyle(styles.get("fonce"));
+		cell = r.createCell(12);
+		cell.setCellValue(nbInvalidCDS);
+		cell.setCellStyle(styles.get("int"));
+		
+		for(i=0;i<19;i++){
+			s.autoSizeColumn(i);
+		}
 	}
-	//setColonneFloat(s, trinucleoFreqPhase[i], 2*i+2, "float");
-}
-//if (n==3) temp=7 else temp=5;
-for(i=0;i<3;i++){
-	setColonneInt(s, trinucleoPrefPhase[i], 7+i, "int");
-}
-//Calcul totaux
-r = s.createRow(65);
-cell = r.createCell(0);
-cell.setCellValue("Total");
-cell.setCellStyle(styles.get("titre"));
-for(i=1;i<=6;i++){
-	cell = r.createCell(i);
-	char col = (char) ('A'+i);
-	cell.setCellFormula("SUM("+col+"2:"+col+"65)");
-	cell.setCellStyle(styles.get("titre"));
-}
-//Partie dinucleo
-//Création 1ere ligne
-titres = listeTitreColonne(2);
-i=13;
-r=s.getRow(0);
-for(String str:titres){
-	cell = r.createCell(i);
-	cell.setCellStyle(styles.get("titre"));
-	cell.setCellValue(str);
-	i++;
-}
-//Création 1ere colonne
-nucleo = listeNucleotide(2);
-i=1;
-for(String str:nucleo){
-	r = s.getRow(i);
-	cell = r.createCell(12);
-	cell.setCellStyle(styles.get("titre"));
-	cell.setCellValue(str);
-	i++;
-}	
-//Impressions valeurs
-for(i=0;i<2;i++){
-	setColonneInt(s, dinucleoPhase[i], 13+2*i, "int");
-	for(int j=0; j<16; j++){
-		r = s.getRow(j+1);
-		cell = r.createCell(2*i+14);
-		char col = (char) ('A'+2*i+13);
-		cell.setCellFormula(col+Integer.toString(j+2)+"/SUM("+col+"2:"+col+"17)");
-		cell.setCellStyle(styles.get("float"));
-	}
-	//setColonneFloat(s, dinucleoFreqPhase[i], 13+2*i, "float");
-}
-for(i=0;i<2;i++){
-	setColonneInt(s, dinucleoPrefPhase[i], 17+i, "int");
-}
-//Calcul totaux
-r = s.getRow(17);
-cell = r.createCell(12);
-cell.setCellValue("Total");
-cell.setCellStyle(styles.get("titre"));
-for(i=1;i<=4;i++){
-	cell = r.createCell(12+i);
-	char col = (char) ('M'+i);
-	cell.setCellFormula("SUM("+col+"2:"+col+"17)");
-	cell.setCellStyle(styles.get("titre"));
-}
-
-//Informations
-r = s.getRow(20);
-cell = r.createCell(11);
-cell.setCellValue("Informations");
-cell.setCellStyle(styles.get("titre"));
-
-r = s.getRow(21);
-cell = r.createCell(11);
-cell.setCellValue("Number of CDS sequences");
-cell.setCellStyle(styles.get("fonce"));
-cell = r.createCell(12);
-cell.setCellValue(nbCDS);
-cell.setCellStyle(styles.get("int"));
-
-r = s.getRow(22);
-cell = r.createCell(11);
-cell.setCellValue("Number of invalid CDS");
-cell.setCellStyle(styles.get("fonce"));
-cell = r.createCell(12);
-cell.setCellValue(nbInvalidCDS);
-cell.setCellStyle(styles.get("int"));
-
-for(i=0;i<19;i++){
-	s.autoSizeColumn(i);
-}
-}
 	
 	public void feuillesSomme(){
 		List<String> feuillesChromosome = new ArrayList<String>(),
