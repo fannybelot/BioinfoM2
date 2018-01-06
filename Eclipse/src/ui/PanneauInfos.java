@@ -19,10 +19,10 @@ public class PanneauInfos extends JPanel{
                 BorderFactory.createEmptyBorder(5,5,5,5)));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		indicNbGenomeTotal = new IndicateurNumerique("génomes total");
-		indicNbGenomeTraites = new IndicateurNumerique("génomes traités");
-		indicNbGenomeReussis = new IndicateurNumerique("réussis");
-		indicNbGenomeRates = new IndicateurNumerique("ratés");
+		indicNbGenomeTotal = new IndicateurNumerique("Nombre de génomes à traiter");
+		indicNbGenomeTraites = new IndicateurNumerique("Génomes traités");
+		indicNbGenomeReussis = new IndicateurNumerique("Génomes réussis");
+		indicNbGenomeRates = new IndicateurNumerique("Génomes ratés");
 		this.add(indicNbGenomeTotal);
 		this.add(indicNbGenomeTraites);
 		this.add(indicNbGenomeReussis);

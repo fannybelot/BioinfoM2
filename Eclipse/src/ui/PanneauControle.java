@@ -118,7 +118,7 @@ public class PanneauControle {
 
 	/**
 	 * Crée et configure le panneau de lancement.
-	 * Cette fonction doit être appellée par "construitInterface".
+	 * Cette fonction doit être appelée par "construitInterface".
 	 */
 	private static void creePanneauLancement() {
 		//création du panneau
