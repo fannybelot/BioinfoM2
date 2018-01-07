@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
-import excel.Writer;
-
 public class CDS {
 	private StringBuffer rawCDS;
 	private Boolean needComplement;

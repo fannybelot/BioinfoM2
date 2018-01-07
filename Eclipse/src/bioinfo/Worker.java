@@ -1,7 +1,5 @@
 package bioinfo;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.util.Vector;
 
 import excel.Writer;

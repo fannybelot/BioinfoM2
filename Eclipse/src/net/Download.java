@@ -2,7 +2,6 @@ package net;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,8 +9,6 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Timer;
@@ -20,7 +17,6 @@ import java.util.Vector;
 import com.google.gson.Gson;
 
 import bioinfo.Organism;
-import ui.InterfaceUtilisateur;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpResponse;

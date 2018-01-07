@@ -12,12 +12,9 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 import bioinfo.Orchestreur;
 import bioinfo.Organism;
@@ -258,7 +255,7 @@ public class PanneauControle {
 				public void actionPerformed(ActionEvent e)
 				{
 					orch.hardKillWorkers();
-					InterfaceUtilisateur.journalise("INFO", "Abandon des traitement, attention si une écriture de fichier était en cours, ce fichier est peut-être corrompu");
+					InterfaceUtilisateur.journalise("INFO", "Abandon des traitement, attention si une ï¿½criture de fichier ï¿½tait en cours, ce fichier est peut-ï¿½tre corrompu");
 
 					//met a jour les boutons
 					boutonStart.setEnabled(true);

@@ -2,34 +2,22 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 
 import bioinfo.Organism;
 import bioinfo.OrganismHierarchy;
-import net.Download;
-import net.schema.Primary;
 
 public class PanneauHierarchie {
 	private static JPanel panneauHierarchie;
 	private static CheckBoxJTree arbreHierarchie;
 	private static JScrollPane hierarchieScroll;
-	private static JPanel panneauChargement;
 	private static JProgressBar barreChargementDonnees;
-	private static Thread downloadListThread;
 	
 	public static JPanel getPanneauHierarchie(){
 		return panneauHierarchie;
@@ -53,41 +41,41 @@ public class PanneauHierarchie {
 		panneauHierarchie.add(hierarchieScroll, BorderLayout.CENTER);
     }
     
-    private static void afficheBarreTelechargement() {
-    	panneauChargement = new JPanel();
-    	panneauChargement.setLayout(new BorderLayout());
-    	panneauHierarchie.add(panneauChargement, BorderLayout.SOUTH);
-    	
-    	JPanel panneauChargementDonnees = new JPanel();
-    	panneauChargementDonnees.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("Téléchargement de la liste"),
-                BorderFactory.createEmptyBorder(5,5,5,5)));
-    	panneauChargement.add(panneauChargementDonnees);
-    	panneauChargementDonnees.setLayout(new BorderLayout());
-    	
-		barreChargementDonnees = new JProgressBar();
-		barreChargementDonnees.setMinimum(0);
-		barreChargementDonnees.setStringPainted(true);
-		panneauChargementDonnees.add(barreChargementDonnees, BorderLayout.CENTER);
-		
-		JButton boutonStop = new JButton("Stop");
-		boutonStop.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				InterfaceUtilisateur.journalise("INFO", "Abandon de la mise a jour de la liste des organismes");
-				Download.killDownloadThreads();
-				downloadListThread.interrupt();
-				downloadListThread.stop();
-				supprimeBarreTelechargement();
-				PanneauControle.unblockStart();
-			}
-		});
-		panneauChargementDonnees.add(boutonStop, BorderLayout.EAST);
-		
-		panneauHierarchie.validate();
-		panneauHierarchie.repaint();
-    }
+//    private static void afficheBarreTelechargement() {
+//    	panneauChargement = new JPanel();
+//    	panneauChargement.setLayout(new BorderLayout());
+//    	panneauHierarchie.add(panneauChargement, BorderLayout.SOUTH);
+//    	
+//    	JPanel panneauChargementDonnees = new JPanel();
+//    	panneauChargementDonnees.setBorder(BorderFactory.createCompoundBorder(
+//                BorderFactory.createTitledBorder("Téléchargement de la liste"),
+//                BorderFactory.createEmptyBorder(5,5,5,5)));
+//    	panneauChargement.add(panneauChargementDonnees);
+//    	panneauChargementDonnees.setLayout(new BorderLayout());
+//    	
+//		barreChargementDonnees = new JProgressBar();
+//		barreChargementDonnees.setMinimum(0);
+//		barreChargementDonnees.setStringPainted(true);
+//		panneauChargementDonnees.add(barreChargementDonnees, BorderLayout.CENTER);
+//		
+//		JButton boutonStop = new JButton("Stop");
+//		boutonStop.addActionListener(new ActionListener() {
+//			@SuppressWarnings("deprecation")
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				InterfaceUtilisateur.journalise("INFO", "Abandon de la mise a jour de la liste des organismes");
+//				Download.killDownloadThreads();
+//				downloadListThread.interrupt();
+//				downloadListThread.stop();
+//				supprimeBarreTelechargement();
+//				PanneauControle.unblockStart();
+//			}
+//		});
+//		panneauChargementDonnees.add(boutonStop, BorderLayout.EAST);
+//		
+//		panneauHierarchie.validate();
+//		panneauHierarchie.repaint();
+//    }
     
     public static void metNombrePageMaximum(int n) {
     	barreChargementDonnees.setMaximum(n);
@@ -100,11 +88,11 @@ public class PanneauHierarchie {
     	}
     }
     
-    private static void supprimeBarreTelechargement() {
-    	panneauHierarchie.remove(panneauChargement);
-		panneauHierarchie.validate();
-		panneauHierarchie.repaint();
-    }
+//    private static void supprimeBarreTelechargement() {
+//    	panneauHierarchie.remove(panneauChargement);
+//		panneauHierarchie.validate();
+//		panneauHierarchie.repaint();
+//    }
     
     public static void organismListDownloadEnd(Vector<Organism> list){
     	majHierarchieListeOrganismes(list);
