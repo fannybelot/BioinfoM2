@@ -248,17 +248,17 @@ public class PanneauControle {
 					boutonHardStop.setEnabled(true);
 				}
 			});
-		conteneurBoutons.add(boutonStop, BorderLayout.SOUTH);
+		//conteneurBoutons.add(boutonStop, BorderLayout.SOUTH);
 
 		//insertion du bouton HardStop
-		boutonHardStop = new JButton("HardStop");
+		boutonHardStop = new JButton("Stop");
 		boutonHardStop.setEnabled(false);
 		boutonHardStop.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
 				{
 					orch.hardKillWorkers();
-					InterfaceUtilisateur.journalise("INFO", "HardStop !");
+					InterfaceUtilisateur.journalise("INFO", "Abandon des traitement, attention si une écriture de fichier était en cours, ce fichier est peut-être corrompu");
 
 					//met a jour les boutons
 					boutonStart.setEnabled(true);
@@ -267,7 +267,7 @@ public class PanneauControle {
 					boutonPause.setEnabled(false);
 				}
 			});
-		//conteneurBoutons.add(boutonHardStop, BorderLayout.SOUTH);
+		conteneurBoutons.add(boutonHardStop, BorderLayout.SOUTH);
 
 		
 		//initialise les boutons
