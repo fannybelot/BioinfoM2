@@ -84,7 +84,7 @@ public class PanneauControle {
 		//création des options
 		JRadioButton toutTraiter = new JRadioButton("Traiter tous les génomes");
 		toutTraiter.setActionCommand("toutTraiter");
-		JRadioButton traiterPasTraites = new JRadioButton("Traiter les génomes pas encore traités");
+		JRadioButton traiterPasTraites = new JRadioButton("Traiter les génomes non traités");
 		traiterPasTraites.setActionCommand("traiterPasTraites");
 		JRadioButton traiterCoches = new JRadioButton("Traiter les génomes cochés");
 		traiterCoches.setActionCommand("traiterCoches");
@@ -147,11 +147,11 @@ public class PanneauControle {
 						case "toutTraiter":
 							orgas = OrganismHierarchy.getAsList();
 							if(orgas == null){
-								InterfaceUtilisateur.journalise("ERROR", "Vous devez d'abord obtenir la liste des organismes");
+								InterfaceUtilisateur.journalise("ERROR", "Vous devez d'abord obtenir la liste des organismes.");
 								return;
 							}
 							if(orgas.size() == 0){
-								InterfaceUtilisateur.journalise("ERROR", "Il n'y a pas d'organisme dans la liste.");
+								InterfaceUtilisateur.journalise("ERROR", "Il n'y a pas d'organismes dans la liste.");
 								return;
 							}
 							break;
@@ -160,23 +160,23 @@ public class PanneauControle {
 							PanneauHierarchie.getListAlreadyTreated()
 								.forEach(str -> orgas.removeIf(orga -> orga.getName().equals(str)));
 							if(orgas.size() == 0){
-								InterfaceUtilisateur.journalise("ERROR", "Il n'y a pas d'organisme pas traités.");
+								InterfaceUtilisateur.journalise("ERROR", "Il n'y a pas d'organismes non traités.");
 								return;
 							}
 							break;
 						case "traiterCoches":
 							orgas = PanneauHierarchie.obtientOrganismesCoches();
 							if(orgas == null){
-								InterfaceUtilisateur.journalise("ERROR", "Vous devez sélectionner au moins 1 organisme avant de lancer le traitement.");
+								InterfaceUtilisateur.journalise("ERROR", "Vous devez sélectionner au moins un organisme avant de lancer le traitement.");
 								return;
 							}
 							if(orgas.size() == 0){
-								InterfaceUtilisateur.journalise("ERROR", "Vous devez sélectionner au moins 1 organisme avant de lancer le traitement.");
+								InterfaceUtilisateur.journalise("ERROR", "Vous devez sélectionner au moins un organisme avant de lancer le traitement.");
 								return;
 							}
 							break;
 						default: 
-							InterfaceUtilisateur.journalise("ERROR", "Option pas reconnue");
+							InterfaceUtilisateur.journalise("ERROR", "Option non reconnue");
 							return;
 					}
 					
@@ -255,7 +255,7 @@ public class PanneauControle {
 				public void actionPerformed(ActionEvent e)
 				{
 					orch.hardKillWorkers();
-					InterfaceUtilisateur.journalise("INFO", "Abandon des traitement, attention si une �criture de fichier �tait en cours, ce fichier est peut-�tre corrompu");
+					InterfaceUtilisateur.journalise("INFO", "Abandon des traitement, attention si une écriture de fichier était en cours, ce fichier est peut-être corrompu");
 
 					//met a jour les boutons
 					boutonStart.setEnabled(true);
