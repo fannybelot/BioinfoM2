@@ -34,36 +34,30 @@ public class Worker extends Thread {
 			try{
 				Organism orga = joblist.remove(0);
 				try {
-					InterfaceUtilisateur.journalise("Info", "Téléchargement de "+orga.getName()+
-							" dans le thread "+numero_de_thread);
+					InterfaceUtilisateur.journalise("Info", "Thread "+numero_de_thread + 
+						" : Téléchargement de "+orga.getName());
 					orga.downloadNCs(this.saveGene);
-//					InterfaceUtilisateur.journalise("Info", "Fin du téléchargement, début du parsing de "+orga.getName()+
-//							" dans le thread "+numero_de_thread);
-//					orga.parse();
-//					InterfaceUtilisateur.journalise("Info", "Fin du parsing, début de l'analyse de "+orga.getName()+
-//							" dans le thread "+numero_de_thread);
-//					orga.statistique();
-					InterfaceUtilisateur.journalise("Info", "Fin du téléchargement, début du parsing de "+orga.getName()+
-							" dans le thread "+numero_de_thread);
+					InterfaceUtilisateur.journalise("Info", "Thread "+numero_de_thread + 
+						" : Fin du téléchargement, début du parsing de "+orga.getName());
 					orga.parseAndStat();
-					InterfaceUtilisateur.journalise("Info", "Fin du parsing, début de l'écriture de "+orga.getName()+
-							" dans le thread "+numero_de_thread);
+					InterfaceUtilisateur.journalise("Info", "Thread "+numero_de_thread + 
+						" : Fin du parsing, début de l'écriture de "+orga.getName());
 					w = new Writer();
 					w.write(orga);
-					InterfaceUtilisateur.journalise("Info", "Fin de l'écriture de "+orga.getName()+
-							" dans le thread "+numero_de_thread);
+					InterfaceUtilisateur.journalise("Info", "Thread "+numero_de_thread + 
+						" : Fin de l'écriture de "+orga.getName());
 					InterfaceUtilisateur.unGenomeReussi(orga.getName());
 				}
 				catch(Exception e){
 					System.out.println("Erreur dans worker : " + e);
 					if (e.getMessage().contains("Server returned HTTP response code: 502 for URL")) {
 						joblist.insertElementAt(orga, 0);
-						InterfaceUtilisateur.journalise("Warning", "Traitement de "+orga.getName()+" raté"+
-								" dans le thread "+numero_de_thread + " (502 Bad Gateway). Nouvel essai.");
+						InterfaceUtilisateur.journalise("Warning", "Thread "+numero_de_thread + 
+							" : Traitement de "+orga.getName()+" raté" + " (502 Bad Gateway). Nouvel essai.");
 					}
 					else {
-						InterfaceUtilisateur.journalise("Warning", "Traitement de "+orga.getName()+" raté"+
-								" dans le thread "+numero_de_thread + ". Exception "+e);
+						InterfaceUtilisateur.journalise("Warning", "Thread "+numero_de_thread + 
+							" : Traitement de "+orga.getName()+" raté" + ". Exception "+e);
 						InterfaceUtilisateur.unGenomeRate();
 						e.printStackTrace();
 					}
